@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc",
+    "dev": "npm run build && sudo npm link",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
@@ -33,5 +34,8 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "commander": "^3.0.2"
   }
 }
