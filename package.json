@@ -1,0 +1,37 @@
+{
+  "name": "wxapp-pack",
+  "version": "1.0.0",
+  "description": "微信小程序打包工具",
+  "main": "./dist/index.js",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "wxapp-pack": "./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ke1992/wxapp-pack.git"
+  },
+  "keywords": [
+    "wxapp",
+    "miniprogram"
+  ],
+  "author": "Ke1992",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ke1992/wxapp-pack/issues"
+  },
+  "homepage": "https://github.com/Ke1992/wxapp-pack#readme",
+  "devDependencies": {
+    "@types/node": "^12.11.7",
+    "@typescript-eslint/eslint-plugin": "^2.5.0",
+    "@typescript-eslint/parser": "^2.5.0",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "typescript": "^3.6.4"
+  }
+}
