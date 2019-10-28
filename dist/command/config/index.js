@@ -3,7 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // 自己的库
 const ConfigTool_1 = require("../../shared/tools/ConfigTool");
 const PromptTool_1 = require("../../shared/tools/PromptTool");
-// 配置命令
+/**
+ * 配置命令
+ */
 async function config() {
     // 更新配置数据
     await ConfigTool_1.default.update();

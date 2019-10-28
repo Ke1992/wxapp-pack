@@ -2,7 +2,9 @@
 import ConfigTool from '../../shared/tools/ConfigTool';
 import PromptTool from '../../shared/tools/PromptTool';
 
-// 配置命令
+/**
+ * 配置命令
+ */
 export default async function config(): Promise<void> {
     // 更新配置数据
     await ConfigTool.update();
