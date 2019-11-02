@@ -14,9 +14,10 @@ program
 program
     .command('build')
     .alias('b')
+    .option('-s, --smart', '启用智能分包')
     .description('使用模块依赖分析模式编译项目')
-    .action(() => {
-    command_1.build();
+    .action(({ smart }) => {
+    command_1.build(smart);
 });
 // 注册配置命令
 program
