@@ -5,6 +5,7 @@ import * as path from 'path';
 import JsAstTool from './JsAstTool';
 import WxsAstTool from './WxsAstTool';
 import WxmlAstTool from './WxmlAstTool';
+import WxssAstTool from './WxssAstTool';
 // 定义
 import {
     TreeItem,
@@ -77,6 +78,13 @@ export default class TreeTool {
         if (ext === '.wxs') {
             return {
                 [entry]: WxsAstTool.getAst(entry, visited),
+            };
+        }
+
+        // 解析WXSS
+        if (ext === '.wxss') {
+            return {
+                [entry]: WxssAstTool.getAst(entry, visited),
             };
         }
 

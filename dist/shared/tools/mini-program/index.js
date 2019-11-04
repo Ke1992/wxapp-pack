@@ -12,3 +12,6 @@ exports.JsonTool = JsonTool_1.default;
 // WXML文件工具类
 const WxmlTool_1 = require("./WxmlTool");
 exports.WxmlTool = WxmlTool_1.default;
+// WXSS文件工具类
+const WxssTool_1 = require("./WxssTool");
+exports.WxssTool = WxssTool_1.default;

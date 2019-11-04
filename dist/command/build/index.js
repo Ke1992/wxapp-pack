@@ -71,6 +71,8 @@ async function build(smart = false) {
     mini_program_1.WxmlTool.getFiles(result);
     // 获取wxs
     mini_program_1.WxsTool.getFiles(result);
+    // 获取wxss
+    mini_program_1.WxssTool.getFiles(result, appJs);
     // 编译结束
     PromptTool_1.default.info('编译结束');
 }

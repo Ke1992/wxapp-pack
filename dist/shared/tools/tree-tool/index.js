@@ -7,6 +7,7 @@ const path = require("path");
 const JsAstTool_1 = require("./JsAstTool");
 const WxsAstTool_1 = require("./WxsAstTool");
 const WxmlAstTool_1 = require("./WxmlAstTool");
+const WxssAstTool_1 = require("./WxssAstTool");
 // 变量
 const visited = {};
 let wxsFiles;
@@ -66,6 +67,12 @@ class TreeTool {
         if (ext === '.wxs') {
             return {
                 [entry]: WxsAstTool_1.default.getAst(entry, visited),
+            };
+        }
+        // 解析WXSS
+        if (ext === '.wxss') {
+            return {
+                [entry]: WxssAstTool_1.default.getAst(entry, visited),
             };
         }
         // 兜底

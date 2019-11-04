@@ -6,6 +6,7 @@ import {
     JsTool,
     WxsTool,
     WxmlTool,
+    WxssTool,
 } from '../../shared/tools/mini-program';
 import BuildTool from '../../shared/tools/BuildTool';
 import ConfigTool from '../../shared/tools/ConfigTool';
@@ -86,6 +87,8 @@ export default async function build(smart = false): Promise<void> {
     WxmlTool.getFiles(result);
     // 获取wxs
     WxsTool.getFiles(result);
+    // 获取wxss
+    WxssTool.getFiles(result, appJs);
     // 编译结束
     PromptTool.info('编译结束');
 }

@@ -6,10 +6,13 @@ import WxsTool from './WxsTool';
 import JsonTool from './JsonTool';
 // WXML文件工具类
 import WxmlTool from './WxmlTool';
+// WXSS文件工具类
+import WxssTool from './WxssTool';
 
 export {
     JsTool,
     WxsTool,
     JsonTool,
     WxmlTool,
+    WxssTool,
 };
