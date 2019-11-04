@@ -82,6 +82,21 @@ class AstBase {
         return [...result];
     }
     /**
+     * 过滤.wxs文件
+     * @param entry    [入口路径]
+     * @param source   [根据入口路径解析的结果]
+     * @param wxsFiles [.wxs文件]
+     */
+    static filterWxsFiles(entry, source, wxsFiles) {
+        return source.filter((item) => {
+            // 获取文件后缀
+            const ext = path.extname(item);
+            // 后缀是wxs，就加入wxsFiles
+            ext === '.wxs' && wxsFiles.add(AstBase.formatFilePath(item, entry, 'wxs'));
+            return ext !== '.wxs';
+        });
+    }
+    /**
      * 格式化文件路径
      * @param source [待格式化的路径]
      * @param entry  [入口文件路径]

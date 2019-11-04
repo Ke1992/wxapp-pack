@@ -13,22 +13,19 @@ import {
 export default class JsAstTool extends AstBase {
     /**
      * 获取AST树
-     * @param entry [入口路径]
+     * @param entry    [入口路径]
+     * @param cache    [解析结果缓存]
+     * @param wxsFiles [.wxs文件]
      */
     public static getAst(entry: string, cache: TreeItem, wxsFiles: Set<string>): TreeItem {
         const visited = cache;
         const result: TreeItem = {};
 
-        // 遍历所有文件
-        JsAstTool.getDependencyFromPrecinct(entry, 'es6').filter((item) => {
-            // 获取文件后缀
-            const ext = path.extname(item);
+        // 获取解析结果
+        const source = JsAstTool.getDependencyFromPrecinct(entry, 'es6');
 
-            // 后缀是wxs，就加入gWxsResult
-            ext === '.wxs' && wxsFiles.add(JsAstTool.formatFilePath(item, entry, 'wxs'));
-
-            return ext !== '.wxs';
-        }).forEach((item) => {
+        // 过滤.wxs文件
+        JsAstTool.filterWxsFiles(entry, source, wxsFiles).forEach((item) => {
             const filePath = JsAstTool.formatFilePath(item, entry, 'js');
 
             // 缓存中不存在，则进行递归

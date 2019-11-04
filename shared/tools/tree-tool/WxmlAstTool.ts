@@ -13,22 +13,19 @@ import {
 export default class WxmlAstTool extends AstBase {
     /**
      * 获取AST树
-     * @param entry [入口路径]
+     * @param entry    [入口路径]
+     * @param cache    [解析结果缓存]
+     * @param wxsFiles [.wxs文件]
      */
     public static getAst(entry: string, cache: TreeItem, wxsFiles: Set<string>): TreeItem {
         const visited = cache;
         const result: TreeItem = {};
 
-        // 解析wxml文件
-        WxmlAstTool.getDependencyFromCheerio(entry).filter((item) => {
-            // 获取文件后缀
-            const ext = path.extname(item);
+        // 获取解析结果
+        const source = WxmlAstTool.getDependencyFromCheerio(entry);
 
-            // 后缀是wxs，就加入wxsFiles
-            ext === '.wxs' && wxsFiles.add(WxmlAstTool.formatFilePath(item, entry, 'wxs'));
-
-            return ext !== '.wxs';
-        }).forEach((item) => {
+        // 过滤.wxs文件
+        WxmlAstTool.filterWxsFiles(entry, source, wxsFiles).forEach((item) => {
             const filePath = WxmlAstTool.formatFilePath(item, entry, 'wxml');
 
             // 缓存中不存在，则进行递归
