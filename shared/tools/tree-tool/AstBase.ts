@@ -50,9 +50,8 @@ export default class AstBase {
      * 根据cheerio库获取依赖文件
      * @param filePath [文件路径]
      */
-    protected static getDependencyFromCheerio(
-        filePath: string, wxsFiles: Set<string>,
-    ): Set<string> {
+    protected static getDependencyFromCheerio(filePath: string): string[] {
+        // 包含wxs文件的结果
         const result = new Set<string>();
 
         try {
@@ -76,7 +75,7 @@ export default class AstBase {
                     src,
                 } = wxsArr[i].attribs;
 
-                src && wxsFiles.add(AstBase.formatFilePath(src, filePath, 'wxs'));
+                src && result.add(src);
             }
             // 遍历获取wxml
             for (let i = 0, len = importArr.length; i < len; i += 1) {
@@ -97,7 +96,7 @@ export default class AstBase {
             // do nothing
         }
 
-        return result;
+        return [...result];
     }
 
     /**

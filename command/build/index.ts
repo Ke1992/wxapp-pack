@@ -4,6 +4,7 @@ import * as fs from 'fs-extra';
 // 自己的库
 import {
     JsTool,
+    WxmlTool,
 } from '../../shared/tools/mini-program';
 import BuildTool from '../../shared/tools/BuildTool';
 import ConfigTool from '../../shared/tools/ConfigTool';
@@ -80,6 +81,8 @@ export default async function build(smart = false): Promise<void> {
 
     // 获取js和json
     JsTool.getFiles(entry, result);
+    // 获取wxml
+    WxmlTool.getFiles(result);
     // 编译结束
     PromptTool.info('编译结束');
 }

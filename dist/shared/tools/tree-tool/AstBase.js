@@ -45,7 +45,8 @@ class AstBase {
      * 根据cheerio库获取依赖文件
      * @param filePath [文件路径]
      */
-    static getDependencyFromCheerio(filePath, wxsFiles) {
+    static getDependencyFromCheerio(filePath) {
+        // 包含wxs文件的结果
         const result = new Set();
         try {
             // 获取文件内容
@@ -63,7 +64,7 @@ class AstBase {
             // 遍历获取wxs，不使用cheerio的api以提高性能
             for (let i = 0, len = wxsArr.length; i < len; i += 1) {
                 const { src, } = wxsArr[i].attribs;
-                src && wxsFiles.add(AstBase.formatFilePath(src, filePath, 'wxs'));
+                src && result.add(src);
             }
             // 遍历获取wxml
             for (let i = 0, len = importArr.length; i < len; i += 1) {
@@ -78,7 +79,7 @@ class AstBase {
         catch (e) {
             // do nothing
         }
-        return result;
+        return [...result];
     }
     /**
      * 格式化文件路径

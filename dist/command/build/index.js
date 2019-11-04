@@ -67,6 +67,8 @@ async function build(smart = false) {
     const entry = BuildTool_1.default.getAllEntry(appJs, appJson);
     // 获取js和json
     mini_program_1.JsTool.getFiles(entry, result);
+    // 获取wxml
+    mini_program_1.WxmlTool.getFiles(result);
     // 编译结束
     PromptTool_1.default.info('编译结束');
 }

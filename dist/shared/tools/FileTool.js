@@ -68,5 +68,20 @@ class FileTool {
         }
         return false;
     }
+    /**
+     * 替换文件后缀名
+     * @param filePath [待替换的原始文件路径]
+     * @param ext      [新的文件后缀名]
+     */
+    static replaceExt(filePath, ext) {
+        // 将路径解析成对象
+        const item = path.parse(filePath);
+        // 清空base属性
+        item.base = '';
+        // 重置ext
+        item.ext = ext;
+        // 返回替换后的结果
+        return path.format(item);
+    }
 }
 exports.default = FileTool;

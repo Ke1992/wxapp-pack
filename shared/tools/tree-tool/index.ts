@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import * as path from 'path';
 // 自己的库
 import JsAstTool from './JsAstTool';
+import WxmlAstTool from './WxmlAstTool';
 // 定义
 import {
     TreeItem,
@@ -61,6 +62,13 @@ export default class TreeTool {
         if (ext === '.js') {
             return {
                 [entry]: JsAstTool.getAst(entry, visited, wxsFiles),
+            };
+        }
+
+        // 解析WXML
+        if (ext === '.wxml') {
+            return {
+                [entry]: WxmlAstTool.getAst(entry, visited, wxsFiles),
             };
         }
 
