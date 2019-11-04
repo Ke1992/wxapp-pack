@@ -1,5 +1,3 @@
-// 库
-import * as path from 'path';
 // 自己的库
 import AstBase from './AstBase';
 // 定义
