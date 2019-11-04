@@ -69,6 +69,8 @@ async function build(smart = false) {
     mini_program_1.JsTool.getFiles(entry, result);
     // 获取wxml
     mini_program_1.WxmlTool.getFiles(result);
+    // 获取wxs
+    mini_program_1.WxsTool.getFiles(result);
     // 编译结束
     PromptTool_1.default.info('编译结束');
 }

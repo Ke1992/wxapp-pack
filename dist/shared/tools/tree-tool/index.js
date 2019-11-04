@@ -5,6 +5,7 @@ const _ = require("lodash");
 const path = require("path");
 // 自己的库
 const JsAstTool_1 = require("./JsAstTool");
+const WxsAstTool_1 = require("./WxsAstTool");
 const WxmlAstTool_1 = require("./WxmlAstTool");
 // 变量
 const visited = {};
@@ -59,6 +60,12 @@ class TreeTool {
         if (ext === '.wxml') {
             return {
                 [entry]: WxmlAstTool_1.default.getAst(entry, visited, wxsFiles),
+            };
+        }
+        // 解析WXS
+        if (ext === '.wxs') {
+            return {
+                [entry]: WxsAstTool_1.default.getAst(entry, visited),
             };
         }
         // 兜底
