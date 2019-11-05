@@ -8,6 +8,8 @@ import JsonTool from './JsonTool';
 import WxmlTool from './WxmlTool';
 // WXSS文件工具类
 import WxssTool from './WxssTool';
+// 图片资源工具类
+import ImageTool from './ImageTool';
 
 export {
     JsTool,
@@ -15,4 +17,5 @@ export {
     JsonTool,
     WxmlTool,
     WxssTool,
+    ImageTool,
 };

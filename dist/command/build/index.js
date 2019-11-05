@@ -73,6 +73,8 @@ async function build(smart = false) {
     mini_program_1.WxsTool.getFiles(result);
     // 获取wxss
     mini_program_1.WxssTool.getFiles(result, appJs);
+    // 获取所有图片资源
+    mini_program_1.ImageTool.getFiles(result);
     // 编译结束
     PromptTool_1.default.info('编译结束');
 }

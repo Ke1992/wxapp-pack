@@ -15,3 +15,6 @@ exports.WxmlTool = WxmlTool_1.default;
 // WXSS文件工具类
 const WxssTool_1 = require("./WxssTool");
 exports.WxssTool = WxssTool_1.default;
+// 图片资源工具类
+const ImageTool_1 = require("./ImageTool");
+exports.ImageTool = ImageTool_1.default;
