@@ -6,13 +6,13 @@ import {
 } from '../../interface';
 
 /**
- * WXML AST解析工具类
+ * WXS AST解析工具类
  */
 export default class WxsAstTool extends AstBase {
     /**
      * 获取AST树
-     * @param entry    [入口路径]
-     * @param cache    [解析结果缓存]
+     * @param entry [入口路径]
+     * @param cache [解析结果缓存]
      */
     public static getAst(entry: string, cache: TreeItem): TreeItem {
         const visited = cache;

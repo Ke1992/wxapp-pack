@@ -21,6 +21,7 @@ let wxsFiles: Set<string>;
 export default class TreeTool {
     /**
      * AST树展开成数组
+     * @param entry [入口路径]
      */
     public static toList(entry: string): string[] {
         // 校验空值

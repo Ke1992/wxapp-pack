@@ -17,6 +17,7 @@ let wxsFiles;
 class TreeTool {
     /**
      * AST树展开成数组
+     * @param entry [入口路径]
      */
     static toList(entry) {
         // 校验空值

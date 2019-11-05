@@ -41,7 +41,7 @@ class JsTool {
         const result = new Set();
         // 更新总量
         !isInit && ProgressTool_1.default.updateTotal(entry.size);
-        // 遍历解析
+        // 遍历获取
         entry.forEach((item) => {
             // 获取依赖分析树
             tree_tool_1.default.toList(item).forEach((filePath) => {

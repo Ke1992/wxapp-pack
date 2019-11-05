@@ -16,7 +16,7 @@ const BAR_FORMAT = '解析进度：{bar} {percentage}% | 耗时: {duration}s | �
 export default class ProgressTool {
     /**
      * 初始化进度条
-     * @param options.total  [起始的总任务数量]
+     * @param options.total  [起始的总数量]
      * @param options.prefix [提示前缀]
      */
     public static init(options: ProgressOption): void {
@@ -43,9 +43,10 @@ export default class ProgressTool {
 
     /**
      * 更新进度条进度
+     * @param num [更新的步长]
      */
-    public static update(): void {
-        bar.increment(1);
+    public static update(num = 1): void {
+        bar.increment(num);
     }
 
     /**

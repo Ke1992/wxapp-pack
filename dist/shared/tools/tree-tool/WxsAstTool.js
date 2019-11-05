@@ -3,13 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // 自己的库
 const AstBase_1 = require("./AstBase");
 /**
- * WXML AST解析工具类
+ * WXS AST解析工具类
  */
 class WxsAstTool extends AstBase_1.default {
     /**
      * 获取AST树
-     * @param entry    [入口路径]
-     * @param cache    [解析结果缓存]
+     * @param entry [入口路径]
+     * @param cache [解析结果缓存]
      */
     static getAst(entry, cache) {
         const visited = cache;

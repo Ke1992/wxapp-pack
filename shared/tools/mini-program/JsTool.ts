@@ -48,7 +48,7 @@ export default class JsTool {
 
         // 更新总量
         !isInit && ProgressTool.updateTotal(entry.size);
-        // 遍历解析
+        // 遍历获取
         entry.forEach((item) => {
             // 获取依赖分析树
             TreeTool.toList(item).forEach((filePath) => {

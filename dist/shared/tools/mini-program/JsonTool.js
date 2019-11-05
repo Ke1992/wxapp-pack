@@ -39,23 +39,23 @@ class JsonTool {
         const components = new Set();
         // 更新总量
         ProgressTool_1.default.updateTotal(entry.size);
-        // 遍历判断是否存在
+        // 遍历获取
         entry.forEach((item) => {
-            const filePath = item.replace('.js', '.json');
+            const filePath = FileTool_1.default.replaceExt(item, '.json');
             // 检查json文件是否存在
             if (fs.existsSync(filePath)) {
                 jsonFiles.add(filePath);
                 // 读取配置
                 const { usingComponents, } = fs.readJsonSync(filePath);
-                // 使用了插件
+                // 使用了组件
                 if (!_.isEmpty(usingComponents)) {
-                    // 遍历插件
+                    // 遍历组件
                     _.forEach(usingComponents, (value) => {
                         // 插件，直接忽略
                         if (value.indexOf('plugin://') === 0) {
                             return;
                         }
-                        // 组件js的绝对路径
+                        // 组件的绝对路径
                         const jsPath = FileTool_1.default.getAbsolutePath(item, `${value}.js`);
                         // 不是新的文件就需要再次解析
                         !jsFiles.has(jsPath) && components.add(jsPath);
