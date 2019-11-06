@@ -27,6 +27,31 @@ export default class WxssTool {
         ProgressTool.stop();
     }
 
+    /**
+     * 复制文件到输出目录
+     * @param output [输出目录]
+     * @param result [编译结果]
+     */
+    public static async copy(output: string, { wxssFiles }: Result): Promise<void> {
+        // 获取入口
+        const entry = [...wxssFiles];
+
+        // 遍历复制
+        for (let i = 0, len = entry.length; i < len; i += 1) {
+            const filePath = entry[i];
+            // 获取目标路径
+            const target = FileTool.getCopyTargetPath(output, filePath);
+            // 开始复制
+            // TODO: 使用postcss来删除注释
+            await fs.copy(filePath, target, {
+                overwrite: true, // 开启覆盖模式
+            });
+        }
+
+        // 提示
+        PromptTool.log('WXSS文件复制完成！');
+    }
+
     // ------------------------------私有函数------------------------------
     /**
      * 分析文件

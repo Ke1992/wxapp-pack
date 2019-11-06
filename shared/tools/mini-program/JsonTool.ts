@@ -4,6 +4,7 @@ import * as fs from 'fs-extra';
 // 自己的库
 import JsTool from './JsTool';
 import FileTool from '../FileTool';
+import PromptTool from '../PromptTool';
 import ProgressTool from '../ProgressTool';
 // 定义
 import {
@@ -30,6 +31,30 @@ export default class JsonTool {
         const source = JsTool.analyze(components, result);
         // 进行递归
         JsonTool.getFiles(source, result);
+    }
+
+    /**
+     * 复制文件到输出目录
+     * @param output [输出目录]
+     * @param result [编译结果]
+     */
+    public static async copy(output: string, { jsonFiles }: Result): Promise<void> {
+        // 获取入口
+        const entry = [...jsonFiles];
+
+        // 遍历复制
+        for (let i = 0, len = entry.length; i < len; i += 1) {
+            const filePath = entry[i];
+            // 获取目标路径
+            const target = FileTool.getCopyTargetPath(output, filePath);
+            // 开始复制
+            await fs.copy(filePath, target, {
+                overwrite: true, // 开启覆盖模式
+            });
+        }
+
+        // 提示
+        PromptTool.log('JSON文件复制完成！');
     }
 
     // ------------------------------私有函数------------------------------

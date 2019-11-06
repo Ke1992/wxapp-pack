@@ -83,5 +83,13 @@ class FileTool {
         // 返回替换后的结果
         return path.format(item);
     }
+    /**
+     * 获取复制后的目标路径
+     * @param output   [输出目录]
+     * @param filePath [待复制的文件路径]
+     */
+    static getCopyTargetPath(output, filePath) {
+        return path.join(output, filePath.replace(config_1.ROOT_PATH, ''));
+    }
 }
 exports.default = FileTool;

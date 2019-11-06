@@ -9,6 +9,7 @@ const BuildTool_1 = require("../../shared/tools/BuildTool");
 const ConfigTool_1 = require("../../shared/tools/ConfigTool");
 const PromptTool_1 = require("../../shared/tools/PromptTool");
 const CommandTool_1 = require("../../shared/tools/CommandTool");
+const CompileTool_1 = require("../../shared/tools/CompileTool");
 // 常量
 const config_1 = require("../../shared/config");
 /**
@@ -75,6 +76,8 @@ async function build(smart = false) {
     mini_program_1.WxssTool.getFiles(result, appJs);
     // 获取所有图片资源
     mini_program_1.ImageTool.getFiles(result);
+    // 执行编译任务
+    await CompileTool_1.default.build(result);
     // 编译结束
     PromptTool_1.default.info('编译结束');
 }

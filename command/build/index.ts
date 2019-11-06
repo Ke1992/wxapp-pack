@@ -13,6 +13,7 @@ import BuildTool from '../../shared/tools/BuildTool';
 import ConfigTool from '../../shared/tools/ConfigTool';
 import PromptTool from '../../shared/tools/PromptTool';
 import CommandTool from '../../shared/tools/CommandTool';
+import CompileTool from '../../shared/tools/CompileTool';
 // 常量
 import {
     ROOT,
@@ -92,6 +93,8 @@ export default async function build(smart = false): Promise<void> {
     WxssTool.getFiles(result, appJs);
     // 获取所有图片资源
     ImageTool.getFiles(result);
+    // 执行编译任务
+    await CompileTool.build(result);
     // 编译结束
     PromptTool.info('编译结束');
 }

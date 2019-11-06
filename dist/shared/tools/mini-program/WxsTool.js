@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// 库
+const fs = require("fs-extra");
 // 自己的库
 const FileTool_1 = require("../FileTool");
 const tree_tool_1 = require("../tree-tool");
@@ -20,6 +22,28 @@ class WxsTool {
         WxsTool.analyze(result);
         // 停止进度条
         ProgressTool_1.default.stop();
+    }
+    /**
+     * 复制文件到输出目录
+     * @param output [输出目录]
+     * @param result [编译结果]
+     */
+    static async copy(output, { wxsFiles }) {
+        // 获取入口
+        const entry = [...wxsFiles];
+        // 遍历复制
+        for (let i = 0, len = entry.length; i < len; i += 1) {
+            const filePath = entry[i];
+            // 获取目标路径
+            const target = FileTool_1.default.getCopyTargetPath(output, filePath);
+            // 开始复制
+            // TODO: 考虑是否需要移除一下注释
+            await fs.copy(filePath, target, {
+                overwrite: true,
+            });
+        }
+        // 提示
+        PromptTool_1.default.log('WXS文件复制完成！');
     }
     // ------------------------------私有函数------------------------------
     /**

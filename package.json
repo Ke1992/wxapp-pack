@@ -48,6 +48,7 @@
     "fs-extra": "^8.1.0",
     "inquirer": "^7.0.0",
     "lodash": "^4.17.15",
-    "precinct": "^6.1.2"
+    "precinct": "^6.1.2",
+    "terser": "^4.3.9"
   }
 }

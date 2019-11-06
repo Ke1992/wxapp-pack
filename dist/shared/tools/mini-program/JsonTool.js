@@ -6,6 +6,7 @@ const fs = require("fs-extra");
 // 自己的库
 const JsTool_1 = require("./JsTool");
 const FileTool_1 = require("../FileTool");
+const PromptTool_1 = require("../PromptTool");
 const ProgressTool_1 = require("../ProgressTool");
 /**
  * JSON文件工具类
@@ -27,6 +28,27 @@ class JsonTool {
         const source = JsTool_1.default.analyze(components, result);
         // 进行递归
         JsonTool.getFiles(source, result);
+    }
+    /**
+     * 复制文件到输出目录
+     * @param output [输出目录]
+     * @param result [编译结果]
+     */
+    static async copy(output, { jsonFiles }) {
+        // 获取入口
+        const entry = [...jsonFiles];
+        // 遍历复制
+        for (let i = 0, len = entry.length; i < len; i += 1) {
+            const filePath = entry[i];
+            // 获取目标路径
+            const target = FileTool_1.default.getCopyTargetPath(output, filePath);
+            // 开始复制
+            await fs.copy(filePath, target, {
+                overwrite: true,
+            });
+        }
+        // 提示
+        PromptTool_1.default.log('JSON文件复制完成！');
     }
     // ------------------------------私有函数------------------------------
     /**

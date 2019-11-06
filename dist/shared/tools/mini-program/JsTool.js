@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // 库
 const path = require("path");
+const fs = require("fs-extra");
+const terser = require("terser");
 // 自己的库
 const JsonTool_1 = require("./JsonTool");
 const FileTool_1 = require("../FileTool");
@@ -31,6 +33,34 @@ class JsTool {
         JsonTool_1.default.getFiles(source, result);
         // 停止进度条
         ProgressTool_1.default.stop();
+    }
+    /**
+     * 复制文件到输出目录
+     * @param output       [输出目录]
+     * @param result       [编译结果]
+     * @param terserConfig [JS压缩配置]
+     */
+    static async copy(output, { jsFiles }, terserConfig) {
+        // 获取入口
+        const entry = [...jsFiles];
+        // 遍历复制
+        for (let i = 0, len = entry.length; i < len; i += 1) {
+            const filePath = entry[i];
+            // 读取文件内容
+            const content = await FileTool_1.default.readFileAsync(filePath);
+            // 压缩代码
+            const { code, error, } = terser.minify(content, terserConfig);
+            // 如果出现异常，直接抛出
+            if (error) {
+                throw error;
+            }
+            // 获取目标路径
+            const target = FileTool_1.default.getCopyTargetPath(output, filePath);
+            // 开始复制（压缩代码）
+            await fs.outputFile(target, code);
+        }
+        // 提示
+        PromptTool_1.default.log('JS文件复制完成！');
     }
     /**
      * 分析文件

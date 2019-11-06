@@ -1,13 +1,9 @@
 // JS压缩配置（https://www.npmjs.com/package/terser#api-reference）
-interface TerserConfig {
+export interface TerserConfig {
     mangle: boolean;
     compress: boolean;
 }
 
-
-/************************
-        对外定义区
-*************************/
 // 配置数据
 export interface ConfigData {
     // 编译相关配置

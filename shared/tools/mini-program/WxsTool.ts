@@ -1,3 +1,5 @@
+// 库
+import * as fs from 'fs-extra';
 // 自己的库
 import FileTool from '../FileTool';
 import TreeTool from '../tree-tool';
@@ -23,6 +25,31 @@ export default class WxsTool {
         WxsTool.analyze(result);
         // 停止进度条
         ProgressTool.stop();
+    }
+
+    /**
+     * 复制文件到输出目录
+     * @param output [输出目录]
+     * @param result [编译结果]
+     */
+    public static async copy(output: string, { wxsFiles }: Result): Promise<void> {
+        // 获取入口
+        const entry = [...wxsFiles];
+
+        // 遍历复制
+        for (let i = 0, len = entry.length; i < len; i += 1) {
+            const filePath = entry[i];
+            // 获取目标路径
+            const target = FileTool.getCopyTargetPath(output, filePath);
+            // 开始复制
+            // TODO: 考虑是否需要移除一下注释
+            await fs.copy(filePath, target, {
+                overwrite: true, // 开启覆盖模式
+            });
+        }
+
+        // 提示
+        PromptTool.log('WXS文件复制完成！');
     }
 
     // ------------------------------私有函数------------------------------

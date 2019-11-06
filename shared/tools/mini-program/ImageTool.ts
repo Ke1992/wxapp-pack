@@ -2,6 +2,7 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
 // 自己的库
+import FileTool from '../FileTool';
 import PromptTool from '../PromptTool';
 import ProgressTool from '../ProgressTool';
 // 常量
@@ -33,6 +34,30 @@ export default class ImageTool {
         ImageTool.analyze(result, ROOT_PATH, true);
         // 停止进度条
         ProgressTool.stop();
+    }
+
+    /**
+     * 复制文件到输出目录
+     * @param output [输出目录]
+     * @param result [编译结果]
+     */
+    public static async copy(output: string, { imageFiles }: Result): Promise<void> {
+        // 获取入口
+        const entry = [...imageFiles];
+
+        // 遍历复制
+        for (let i = 0, len = entry.length; i < len; i += 1) {
+            const filePath = entry[i];
+            // 获取目标路径
+            const target = FileTool.getCopyTargetPath(output, filePath);
+            // 开始复制
+            await fs.copy(filePath, target, {
+                overwrite: true, // 开启覆盖模式
+            });
+        }
+
+        // 提示
+        PromptTool.log('Image文件复制完成！');
     }
 
     // ------------------------------私有函数------------------------------
