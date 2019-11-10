@@ -56,7 +56,7 @@ class JsonTool {
      * @param entry  [分析入口]
      * @param result [编译结果对象]
      */
-    static analyze(entry, { jsFiles, jsonFiles }) {
+    static analyze(entry, { jsFiles, jsonFiles, invalidFiles }) {
         // 引用的所有组件
         const components = new Set();
         // 更新总量
@@ -79,8 +79,15 @@ class JsonTool {
                         }
                         // 组件的绝对路径
                         const jsPath = FileTool_1.default.getAbsolutePath(item, `${value}.js`);
-                        // 不是新的文件就需要再次解析
-                        !jsFiles.has(jsPath) && components.add(jsPath);
+                        // 新文件
+                        if (!jsFiles.has(jsPath)) {
+                            // 校验文件是否存在
+                            if (!FileTool_1.default.checkExists(filePath, jsPath, invalidFiles)) {
+                                return;
+                            }
+                            // 需要再次解析
+                            components.add(jsPath);
+                        }
                     });
                 }
             }
