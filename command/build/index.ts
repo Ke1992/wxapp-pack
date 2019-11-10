@@ -95,6 +95,8 @@ export default async function build(smart = false): Promise<void> {
     ImageTool.getFiles(result);
     // 执行编译任务
     await CompileTool.build(result);
+    // 输出无效文件
+    BuildTool.output(result, invalidFileWhitelist);
     // 编译结束
     PromptTool.info('编译结束');
 }

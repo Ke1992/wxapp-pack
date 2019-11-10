@@ -78,6 +78,8 @@ async function build(smart = false) {
     mini_program_1.ImageTool.getFiles(result);
     // 执行编译任务
     await CompileTool_1.default.build(result);
+    // 输出无效文件
+    BuildTool_1.default.output(result, invalidFileWhitelist);
     // 编译结束
     PromptTool_1.default.info('编译结束');
 }
