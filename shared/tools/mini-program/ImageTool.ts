@@ -20,9 +20,10 @@ import {
 export default class ImageTool {
     /**
      * 获取文件
-     * @param result [编译结果对象]
+     * @param result       [编译结果对象]
+     * @param imageExtList [允许复制的图片后缀列表]
      */
-    public static getFiles(result: Result): void {
+    public static getFiles(result: Result, imageExtList: string[]): void {
         // 提示
         PromptTool.info('开始解析Image');
         // 初始化进度条
@@ -31,7 +32,7 @@ export default class ImageTool {
             total: 1,
         });
         // 开始解析wxs
-        ImageTool.analyze(result, ROOT_PATH, true);
+        ImageTool.analyze(result, imageExtList, ROOT_PATH, true);
         // 停止进度条
         ProgressTool.stop();
     }
@@ -63,11 +64,14 @@ export default class ImageTool {
     // ------------------------------私有函数------------------------------
     /**
      * 分析文件
-     * @param result [编译结果对象]
-     * @param entry  [待分析的入口路径]
-     * @param isInit [是否是第一次解析]
+     * @param result       [编译结果对象]
+     * @param imageExtList [允许复制的图片后缀列表]
+     * @param entry        [待分析的入口路径]
+     * @param isInit       [是否是第一次解析]
      */
-    private static analyze(result: Result, entry: string, isInit = false): void {
+    private static analyze(
+        result: Result, imageExtList: string[], entry: string, isInit = false,
+    ): void {
         const {
             imageFiles,
         } = result;
@@ -81,12 +85,12 @@ export default class ImageTool {
             const ext = path.extname(item);
             const filePath = path.resolve(entry, './', item); // 绝对路径
 
-            // TODO: 这里应该开配置项
-            if (ext === '.jpg' || ext === '.png' || ext === '.gif') {
+            // 如果后缀在白名单内
+            if (imageExtList.includes(ext)) {
                 imageFiles.add(filePath);
             } else if (filePath.indexOf('node_modules') < 0 && fs.statSync(filePath).isDirectory()) {
                 // 非node_modules && 对目录进行递归
-                ImageTool.analyze(result, filePath);
+                ImageTool.analyze(result, imageExtList, filePath);
             }
         });
 

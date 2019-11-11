@@ -20,6 +20,7 @@ class ConfigTool {
             output: '../wxapp-pack-dist',
             analyse: '../wxapp-pack-analyse',
             smartDirName: 'smart-common',
+            imageExtList: ['.jpg', '.png', '.gif'],
             // 压缩相关配置
             terserConfig: {
                 mangle: false,

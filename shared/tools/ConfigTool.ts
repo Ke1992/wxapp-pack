@@ -26,6 +26,7 @@ export default class ConfigTool {
             output: '../wxapp-pack-dist', // 输出目录
             analyse: '../wxapp-pack-analyse', // 分析文件输出目录
             smartDirName: 'smart-common', // 智能分包目录名
+            imageExtList: ['.jpg', '.png', '.gif'], // 允许复制的图片后缀列表
 
             // 压缩相关配置
             terserConfig: { // JS压缩配置（https://www.npmjs.com/package/terser#api-reference）

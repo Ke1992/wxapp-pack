@@ -70,6 +70,7 @@ export default async function build(smart = false): Promise<void> {
     // 获取最新配置
     const {
         before, // 编译前命令
+        imageExtList, // 允许复制的图片后缀列表
         invalidFileWhitelist, // 无效文件白名单
     } = ConfigTool.init();
 
@@ -92,7 +93,7 @@ export default async function build(smart = false): Promise<void> {
     // 获取wxss
     WxssTool.getFiles(result, appJs);
     // 获取所有图片资源
-    ImageTool.getFiles(result);
+    ImageTool.getFiles(result, imageExtList);
     // 执行编译任务
     await CompileTool.build(result);
     // 输出无效文件

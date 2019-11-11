@@ -56,6 +56,7 @@ async function build(smart = false) {
     }
     // 获取最新配置
     const { before, // 编译前命令
+    imageExtList, // 允许复制的图片后缀列表
     invalidFileWhitelist, } = ConfigTool_1.default.init();
     // 执行编译前的命令
     await CommandTool_1.default.execute(before);
@@ -75,7 +76,7 @@ async function build(smart = false) {
     // 获取wxss
     mini_program_1.WxssTool.getFiles(result, appJs);
     // 获取所有图片资源
-    mini_program_1.ImageTool.getFiles(result);
+    mini_program_1.ImageTool.getFiles(result, imageExtList);
     // 执行编译任务
     await CompileTool_1.default.build(result);
     // 输出无效文件
