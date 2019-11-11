@@ -37,7 +37,6 @@ export interface TreeResult {
 }
 
 // precinct库参数
-// TODO: 后续改成.d.ts文件
 export interface PrecinctOptions {
     type?: string;
     es6?: {
