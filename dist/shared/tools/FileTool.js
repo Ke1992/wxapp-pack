@@ -15,7 +15,7 @@ class FileTool {
      */
     static readFileAsync(filePath) {
         return new Promise((resolve) => {
-            fs.readFile(filePath, (error, data) => {
+            fs.readFile(filePath, 'utf8', (error, data) => {
                 // 异常直接抛出
                 if (error) {
                     throw error;
