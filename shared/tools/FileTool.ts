@@ -21,7 +21,6 @@ export default class FileTool {
      * @param filePath [文件路径]
      */
     public static readFileAsync(filePath: string): Promise<string> {
-        // TODO: 增加编码参数
         return new Promise((resolve) => {
             fs.readFile(filePath, (error, data) => {
                 // 异常直接抛出
