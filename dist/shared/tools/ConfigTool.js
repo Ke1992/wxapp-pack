@@ -39,10 +39,8 @@ class ConfigTool {
                 config[key] = value;
             });
         }
-        else {
-            // 不存在则写配置文件
-            ConfigTool.save(config);
-        }
+        // 不论是否存在都写配置文件
+        ConfigTool.save(config);
         return config;
     }
     /**
