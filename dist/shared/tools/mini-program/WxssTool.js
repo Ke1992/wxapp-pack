@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // 库
 const fs = require("fs-extra");
-const postcss = require("postcss");
 // 自己的库
 const FileTool_1 = require("../FileTool");
 const tree_tool_1 = require("../tree-tool");
@@ -38,7 +37,7 @@ class WxssTool {
             // 读取文件内容
             const content = await FileTool_1.default.readFileAsync(filePath);
             // 移除注释
-            const code = WxssTool.removeComment(content);
+            const code = tree_tool_1.default.removeComment(content, 'wxss');
             // 获取目标路径
             const target = FileTool_1.default.getCopyTargetPath(output, filePath);
             // 开始复制
@@ -82,20 +81,6 @@ class WxssTool {
             // 更新进度
             ProgressTool_1.default.update();
         });
-    }
-    /**
-     * 删除注释
-     * @param wxss [待删除注释的css代码]
-     */
-    static removeComment(wxss) {
-        // 先格式化一次，再解析成ast树
-        const ast = postcss.parse(wxss);
-        // 遍历注释并删除
-        ast.walkComments((comment) => {
-            comment.remove();
-        });
-        // 返回删除后的代码
-        return ast.toString();
     }
 }
 exports.default = WxssTool;

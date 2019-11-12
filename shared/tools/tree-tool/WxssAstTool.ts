@@ -1,3 +1,5 @@
+// 库
+import * as postcss from 'postcss';
 // 自己的库
 import AstBase from './AstBase';
 // 定义
@@ -33,5 +35,20 @@ export default class WxssAstTool extends AstBase {
         });
 
         return result;
+    }
+
+    /**
+     * 删除注释
+     * @param wxss [待删除注释的wxss代码]
+     */
+    public static removeComment(wxss: string): string {
+        // 先格式化一次，再解析成ast树
+        const ast = postcss.parse(wxss);
+        // 遍历注释并删除
+        ast.walkComments((comment) => {
+            comment.remove();
+        });
+        // 返回删除后的代码
+        return ast.toString();
     }
 }

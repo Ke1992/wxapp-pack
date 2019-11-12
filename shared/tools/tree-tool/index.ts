@@ -38,6 +38,20 @@ export default class TreeTool {
         return [...result].concat(...data.wxs);
     }
 
+    /**
+     * 删除注释
+     * @param source [待删除注释的代码]
+     * @param type [代码类型]
+     */
+    public static removeComment(source: string, type: string): string {
+        if (type === 'wxss') {
+            return WxssAstTool.removeComment(source);
+        }
+
+        // 兜底
+        return source;
+    }
+
     // ------------------------------私有函数------------------------------
     /**
      * 根据入口解析AST树

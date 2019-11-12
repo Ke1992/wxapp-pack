@@ -31,6 +31,18 @@ class TreeTool {
         // 返回数据
         return [...result].concat(...data.wxs);
     }
+    /**
+     * 删除注释
+     * @param source [待删除注释的代码]
+     * @param type [代码类型]
+     */
+    static removeComment(source, type) {
+        if (type === 'wxss') {
+            return WxssAstTool_1.default.removeComment(source);
+        }
+        // 兜底
+        return source;
+    }
     // ------------------------------私有函数------------------------------
     /**
      * 根据入口解析AST树

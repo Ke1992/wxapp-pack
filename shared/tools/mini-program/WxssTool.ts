@@ -1,6 +1,5 @@
 // 库
 import * as fs from 'fs-extra';
-import * as postcss from 'postcss';
 // 自己的库
 import FileTool from '../FileTool';
 import TreeTool from '../tree-tool';
@@ -43,7 +42,7 @@ export default class WxssTool {
             // 读取文件内容
             const content = await FileTool.readFileAsync(filePath);
             // 移除注释
-            const code = WxssTool.removeComment(content);
+            const code = TreeTool.removeComment(content, 'wxss');
             // 获取目标路径
             const target = FileTool.getCopyTargetPath(output, filePath);
             // 开始复制
@@ -94,20 +93,5 @@ export default class WxssTool {
             // 更新进度
             ProgressTool.update();
         });
-    }
-
-    /**
-     * 删除注释
-     * @param wxss [待删除注释的css代码]
-     */
-    private static removeComment(wxss: string): string {
-        // 先格式化一次，再解析成ast树
-        const ast = postcss.parse(wxss);
-        // 遍历注释并删除
-        ast.walkComments((comment) => {
-            comment.remove();
-        });
-        // 返回删除后的代码
-        return ast.toString();
     }
 }

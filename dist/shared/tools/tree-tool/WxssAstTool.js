@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// 库
+const postcss = require("postcss");
 // 自己的库
 const AstBase_1 = require("./AstBase");
 /**
@@ -26,6 +28,20 @@ class WxssAstTool extends AstBase_1.default {
             result[filePath] = visited[filePath];
         });
         return result;
+    }
+    /**
+     * 删除注释
+     * @param wxss [待删除注释的wxss代码]
+     */
+    static removeComment(wxss) {
+        // 先格式化一次，再解析成ast树
+        const ast = postcss.parse(wxss);
+        // 遍历注释并删除
+        ast.walkComments((comment) => {
+            comment.remove();
+        });
+        // 返回删除后的代码
+        return ast.toString();
     }
 }
 exports.default = WxssAstTool;
