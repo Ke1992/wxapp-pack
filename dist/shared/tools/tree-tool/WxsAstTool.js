@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// 库
+const generator_1 = require("@babel/generator");
+const parser = require("@babel/parser");
 // 自己的库
 const AstBase_1 = require("./AstBase");
 /**
@@ -26,6 +29,21 @@ class WxsAstTool extends AstBase_1.default {
             result[filePath] = visited[filePath];
         });
         return result;
+    }
+    /**
+     * 删除注释
+     * @param wxs [待删除注释的wxss代码]
+     */
+    static removeComment(wxs) {
+        // 生成AST树
+        const ast = parser.parse(wxs, {
+            allowImportExportEverywhere: true,
+        });
+        const { code, } = generator_1.default(ast, {
+            // TODO: 为babel压缩增加配置项
+            comments: false,
+        });
+        return code;
     }
 }
 exports.default = WxsAstTool;

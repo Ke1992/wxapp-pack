@@ -1,3 +1,6 @@
+// 库
+import generate from '@babel/generator';
+import * as parser from '@babel/parser';
 // 自己的库
 import AstBase from './AstBase';
 // 定义
@@ -33,5 +36,25 @@ export default class WxsAstTool extends AstBase {
         });
 
         return result;
+    }
+
+    /**
+     * 删除注释
+     * @param wxs [待删除注释的wxss代码]
+     */
+    public static removeComment(wxs: string): string {
+        // 生成AST树
+        const ast = parser.parse(wxs, {
+            allowImportExportEverywhere: true, // 允许import和export出现在任意地方
+        });
+
+        const {
+            code,
+        } = generate(ast, {
+            // TODO: 为babel压缩增加配置项
+            comments: false, // 不包含注释
+        });
+
+        return code;
     }
 }

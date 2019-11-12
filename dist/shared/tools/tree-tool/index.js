@@ -37,6 +37,9 @@ class TreeTool {
      * @param type [代码类型]
      */
     static removeComment(source, type) {
+        if (type === 'wxs') {
+            return WxsAstTool_1.default.removeComment(source);
+        }
         if (type === 'wxss') {
             return WxssAstTool_1.default.removeComment(source);
         }

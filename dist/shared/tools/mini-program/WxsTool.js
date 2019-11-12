@@ -34,13 +34,14 @@ class WxsTool {
         // 遍历复制
         for (let i = 0, len = entry.length; i < len; i += 1) {
             const filePath = entry[i];
+            // 读取文件内容
+            const content = await FileTool_1.default.readFileAsync(filePath);
+            // 移除注释
+            const code = tree_tool_1.default.removeComment(content, 'wxs');
             // 获取目标路径
             const target = FileTool_1.default.getCopyTargetPath(output, filePath);
             // 开始复制
-            // TODO: 考虑是否需要移除一下注释
-            await fs.copy(filePath, target, {
-                overwrite: true,
-            });
+            await fs.outputFile(target, code);
         }
         // 提示
         PromptTool_1.default.log('WXS文件复制完成！');

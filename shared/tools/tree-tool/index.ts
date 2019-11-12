@@ -44,7 +44,9 @@ export default class TreeTool {
      * @param type [代码类型]
      */
     public static removeComment(source: string, type: string): string {
-        if (type === 'wxss') {
+        if (type === 'wxs') {
+            return WxsAstTool.removeComment(source);
+        } if (type === 'wxss') {
             return WxssAstTool.removeComment(source);
         }
 
