@@ -33,6 +33,9 @@ export default class ConfigTool {
                 mangle: false,
                 compress: false,
             },
+            babelGeneratorConfig: { // babel压缩配置（https://babeljs.io/docs/en/babel-generator）
+                comments: false, // 不包含注释
+            },
 
             // 分析相关配置
             analyseWhiteList: [], // 未使用文件白名单（analyse命令用）

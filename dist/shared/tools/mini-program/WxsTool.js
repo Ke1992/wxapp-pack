@@ -25,10 +25,11 @@ class WxsTool {
     }
     /**
      * 复制文件到输出目录
-     * @param output [输出目录]
-     * @param result [编译结果]
+     * @param output               [输出目录]
+     * @param result               [编译结果]
+     * @param babelGeneratorConfig [babel压缩配置]
      */
-    static async copy(output, { wxsFiles }) {
+    static async copy(output, { wxsFiles }, babelGeneratorConfig) {
         // 获取入口
         const entry = [...wxsFiles];
         // 遍历复制
@@ -37,7 +38,9 @@ class WxsTool {
             // 读取文件内容
             const content = await FileTool_1.default.readFileAsync(filePath);
             // 移除注释
-            const code = tree_tool_1.default.removeComment(content, 'wxs');
+            const code = tree_tool_1.default.removeComment(content, 'wxs', {
+                generator: babelGeneratorConfig,
+            });
             // 获取目标路径
             const target = FileTool_1.default.getCopyTargetPath(output, filePath);
             // 开始复制

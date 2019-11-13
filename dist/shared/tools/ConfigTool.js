@@ -26,6 +26,9 @@ class ConfigTool {
                 mangle: false,
                 compress: false,
             },
+            babelGeneratorConfig: {
+                comments: false,
+            },
             // 分析相关配置
             analyseWhiteList: [],
             invalidFileWhitelist: [],

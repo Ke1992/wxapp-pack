@@ -17,7 +17,8 @@ class CompileTool {
     static async build(result) {
         // 获取最新配置
         const { output, // 输出目录
-        terserConfig, } = ConfigTool_1.default.init();
+        terserConfig, // js压缩配置
+        babelGeneratorConfig, } = ConfigTool_1.default.init();
         // 提示
         PromptTool_1.default.info('开始复制文件');
         // 执行任务
@@ -31,7 +32,7 @@ class CompileTool {
             // 复制WXML文件
             await mini_program_1.WxmlTool.copy(output, result);
             // 复制WXS文件
-            await mini_program_1.WxsTool.copy(output, result);
+            await mini_program_1.WxsTool.copy(output, result, babelGeneratorConfig);
             // 复制WXSS文件
             await mini_program_1.WxssTool.copy(output, result);
             // 复制Image文件

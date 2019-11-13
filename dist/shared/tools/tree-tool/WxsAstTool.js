@@ -32,17 +32,15 @@ class WxsAstTool extends AstBase_1.default {
     }
     /**
      * 删除注释
-     * @param wxs [待删除注释的wxss代码]
+     * @param wxs                  [待删除注释的wxss代码]
+     * @param babelGeneratorConfig [babel压缩配置]
      */
-    static removeComment(wxs) {
+    static removeComment(wxs, babelGeneratorConfig) {
         // 生成AST树
         const ast = parser.parse(wxs, {
             allowImportExportEverywhere: true,
         });
-        const { code, } = generator_1.default(ast, {
-            // TODO: 为babel压缩增加配置项
-            comments: false,
-        });
+        const { code, } = generator_1.default(ast, babelGeneratorConfig);
         return code;
     }
 }

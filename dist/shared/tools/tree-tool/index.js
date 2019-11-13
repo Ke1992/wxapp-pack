@@ -34,11 +34,13 @@ class TreeTool {
     /**
      * 删除注释
      * @param source [待删除注释的代码]
-     * @param type [代码类型]
+     * @param type   [代码类型]
+     * @param config [babel压缩配置]
      */
-    static removeComment(source, type) {
+    static removeComment(source, type, config = {}) {
+        const { generator, } = config;
         if (type === 'wxs') {
-            return WxsAstTool_1.default.removeComment(source);
+            return WxsAstTool_1.default.removeComment(source, generator);
         }
         if (type === 'wxss') {
             return WxssAstTool_1.default.removeComment(source);

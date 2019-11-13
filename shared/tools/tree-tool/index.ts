@@ -10,6 +10,7 @@ import WxssAstTool from './WxssAstTool';
 import {
     TreeItem,
     TreeResult,
+    TreeConfig,
 } from '../../interface';
 // 变量
 const visited: TreeItem = {};
@@ -41,11 +42,16 @@ export default class TreeTool {
     /**
      * 删除注释
      * @param source [待删除注释的代码]
-     * @param type [代码类型]
+     * @param type   [代码类型]
+     * @param config [babel压缩配置]
      */
-    public static removeComment(source: string, type: string): string {
+    public static removeComment(source: string, type: string, config: TreeConfig = {}): string {
+        const {
+            generator,
+        } = config;
+
         if (type === 'wxs') {
-            return WxsAstTool.removeComment(source);
+            return WxsAstTool.removeComment(source, generator);
         } if (type === 'wxss') {
             return WxssAstTool.removeComment(source);
         }

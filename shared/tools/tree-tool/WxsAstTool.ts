@@ -6,6 +6,7 @@ import AstBase from './AstBase';
 // 定义
 import {
     TreeItem,
+    BabelGeneratorConfig,
 } from '../../interface';
 
 /**
@@ -40,9 +41,10 @@ export default class WxsAstTool extends AstBase {
 
     /**
      * 删除注释
-     * @param wxs [待删除注释的wxss代码]
+     * @param wxs                  [待删除注释的wxss代码]
+     * @param babelGeneratorConfig [babel压缩配置]
      */
-    public static removeComment(wxs: string): string {
+    public static removeComment(wxs: string, babelGeneratorConfig: BabelGeneratorConfig): string {
         // 生成AST树
         const ast = parser.parse(wxs, {
             allowImportExportEverywhere: true, // 允许import和export出现在任意地方
@@ -50,10 +52,7 @@ export default class WxsAstTool extends AstBase {
 
         const {
             code,
-        } = generate(ast, {
-            // TODO: 为babel压缩增加配置项
-            comments: false, // 不包含注释
-        });
+        } = generate(ast, babelGeneratorConfig);
 
         return code;
     }

@@ -29,6 +29,7 @@ export default class CompileTool {
         const {
             output, // 输出目录
             terserConfig, // js压缩配置
+            babelGeneratorConfig, // babel压缩配置
         } = ConfigTool.init();
 
         // 提示
@@ -45,7 +46,7 @@ export default class CompileTool {
             // 复制WXML文件
             await WxmlTool.copy(output, result);
             // 复制WXS文件
-            await WxsTool.copy(output, result);
+            await WxsTool.copy(output, result, babelGeneratorConfig);
             // 复制WXSS文件
             await WxssTool.copy(output, result);
             // 复制Image文件

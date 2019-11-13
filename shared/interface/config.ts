@@ -4,6 +4,11 @@ export interface TerserConfig {
     compress: boolean;
 }
 
+// babel压缩配置（https://babeljs.io/docs/en/babel-generator）
+export interface BabelGeneratorConfig {
+    comments: boolean;
+}
+
 // 配置数据
 export interface ConfigData {
     // 编译相关配置
@@ -15,13 +20,14 @@ export interface ConfigData {
 
     // 压缩相关配置
     terserConfig: TerserConfig;
+    babelGeneratorConfig: BabelGeneratorConfig;
 
     // 分析相关配置
     analyseWhiteList: string[]; // 未使用文件白名单（analyse命令用）
     invalidFileWhitelist: string[]; // 无效文件白名单（build命令用）
 
     // 方便更新数据
-    [propName: string]: TerserConfig | string | string[];
+    [propName: string]: TerserConfig | BabelGeneratorConfig | string | string[];
 }
 
 // 配置任务项

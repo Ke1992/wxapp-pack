@@ -1,3 +1,8 @@
+// 定义
+import {
+    BabelGeneratorConfig,
+} from './config';
+
 // 无效文件
 export interface InvalidFiles {
     files: {
@@ -34,6 +39,11 @@ export interface TreeItem {
 export interface TreeResult {
     wxs: Set<string>;
     tree: TreeItem;
+}
+
+// AST树参数配置
+export interface TreeConfig {
+    generator?: BabelGeneratorConfig;
 }
 
 // precinct库参数

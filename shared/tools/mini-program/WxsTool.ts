@@ -8,6 +8,7 @@ import ProgressTool from '../ProgressTool';
 // 定义
 import {
     Result,
+    BabelGeneratorConfig,
 } from '../../interface';
 
 /**
@@ -29,10 +30,13 @@ export default class WxsTool {
 
     /**
      * 复制文件到输出目录
-     * @param output [输出目录]
-     * @param result [编译结果]
+     * @param output               [输出目录]
+     * @param result               [编译结果]
+     * @param babelGeneratorConfig [babel压缩配置]
      */
-    public static async copy(output: string, { wxsFiles }: Result): Promise<void> {
+    public static async copy(
+        output: string, { wxsFiles }: Result, babelGeneratorConfig: BabelGeneratorConfig,
+    ): Promise<void> {
         // 获取入口
         const entry = [...wxsFiles];
 
@@ -42,7 +46,9 @@ export default class WxsTool {
             // 读取文件内容
             const content = await FileTool.readFileAsync(filePath);
             // 移除注释
-            const code = TreeTool.removeComment(content, 'wxs');
+            const code = TreeTool.removeComment(content, 'wxs', {
+                generator: babelGeneratorConfig,
+            });
             // 获取目标路径
             const target = FileTool.getCopyTargetPath(output, filePath);
             // 开始复制
