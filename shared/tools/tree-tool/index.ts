@@ -47,9 +47,13 @@ export default class TreeTool {
      */
     public static removeComment(source: string, type: string, config: TreeConfig = {}): string {
         const {
+            terser,
             generator,
         } = config;
 
+        if (type === 'js') {
+            return JsAstTool.removeComment(source, terser);
+        }
         if (type === 'wxs') {
             return WxsAstTool.removeComment(source, generator);
         }

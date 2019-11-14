@@ -1,7 +1,6 @@
 // 库
 import * as path from 'path';
 import * as fs from 'fs-extra';
-import * as terser from 'terser';
 // 自己的库
 import JsonTool from './JsonTool';
 import FileTool from '../FileTool';
@@ -63,15 +62,10 @@ export default class JsTool {
             const filePath = entry[i];
             // 读取文件内容
             const content = await FileTool.readFileAsync(filePath);
-            // 压缩代码
-            const {
-                code,
-                error,
-            } = terser.minify(content, terserConfig);
-            // 如果出现异常，直接抛出
-            if (error) {
-                throw error;
-            }
+            // 移除注释，压缩代码
+            const code = TreeTool.removeComment(content, 'js', {
+                terser: terserConfig,
+            });
             // 获取目标路径
             const target = FileTool.getCopyTargetPath(output, filePath);
             // 开始复制（压缩代码）

@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// 库
+const terser = require("terser");
 // 自己的库
 const AstBase_1 = require("./AstBase");
 /**
@@ -30,6 +32,20 @@ class JsAstTool extends AstBase_1.default {
             result[filePath] = visited[filePath];
         });
         return result;
+    }
+    /**
+     * 删除注释
+     * @param js           [待删除注释的js代码]
+     * @param terserConfig [JS压缩配置]
+     */
+    static removeComment(js, terserConfig) {
+        // 压缩代码
+        const { code, error, } = terser.minify(js, terserConfig);
+        // 如果出现异常，直接抛出
+        if (error) {
+            throw error;
+        }
+        return code;
     }
 }
 exports.default = JsAstTool;

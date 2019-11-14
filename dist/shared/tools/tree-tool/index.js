@@ -38,7 +38,10 @@ class TreeTool {
      * @param config [babel压缩配置]
      */
     static removeComment(source, type, config = {}) {
-        const { generator, } = config;
+        const { terser, generator, } = config;
+        if (type === 'js') {
+            return JsAstTool_1.default.removeComment(source, terser);
+        }
         if (type === 'wxs') {
             return WxsAstTool_1.default.removeComment(source, generator);
         }

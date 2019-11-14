@@ -1,5 +1,6 @@
 // 定义
 import {
+    TerserConfig,
     BabelGeneratorConfig,
 } from './config';
 
@@ -43,6 +44,7 @@ export interface TreeResult {
 
 // AST树参数配置
 export interface TreeConfig {
+    terser?: TerserConfig;
     generator?: BabelGeneratorConfig;
 }
 
