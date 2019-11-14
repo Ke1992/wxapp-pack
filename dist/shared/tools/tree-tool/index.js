@@ -45,6 +45,9 @@ class TreeTool {
         if (type === 'wxss') {
             return WxssAstTool_1.default.removeComment(source);
         }
+        if (type === 'wxml') {
+            return WxmlAstTool_1.default.removeComment(source);
+        }
         // 兜底
         return source;
     }

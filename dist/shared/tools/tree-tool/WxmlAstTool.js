@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// 库
+const decomment = require("decomment");
 // 自己的库
 const AstBase_1 = require("./AstBase");
 /**
@@ -29,6 +31,14 @@ class WxmlAstTool extends AstBase_1.default {
             result[filePath] = visited[filePath];
         });
         return result;
+    }
+    /**
+     * 删除注释
+     * @param wxml [待删除注释的wxml代码]
+     */
+    static removeComment(wxml) {
+        // 返回删除后的代码
+        return decomment.html(wxml);
     }
 }
 exports.default = WxmlAstTool;

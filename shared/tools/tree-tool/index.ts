@@ -52,8 +52,12 @@ export default class TreeTool {
 
         if (type === 'wxs') {
             return WxsAstTool.removeComment(source, generator);
-        } if (type === 'wxss') {
+        }
+        if (type === 'wxss') {
             return WxssAstTool.removeComment(source);
+        }
+        if (type === 'wxml') {
+            return WxmlAstTool.removeComment(source);
         }
 
         // 兜底

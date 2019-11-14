@@ -1,3 +1,5 @@
+// 库
+import * as decomment from 'decomment';
 // 自己的库
 import AstBase from './AstBase';
 // 定义
@@ -37,5 +39,14 @@ export default class WxmlAstTool extends AstBase {
         });
 
         return result;
+    }
+
+    /**
+     * 删除注释
+     * @param wxml [待删除注释的wxml代码]
+     */
+    public static removeComment(wxml: string): string {
+        // 返回删除后的代码
+        return decomment.html(wxml);
     }
 }

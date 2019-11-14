@@ -40,13 +40,14 @@ export default class WxmlTool {
         // 遍历复制
         for (let i = 0, len = entry.length; i < len; i += 1) {
             const filePath = entry[i];
+            // 读取文件内容
+            const content = await FileTool.readFileAsync(filePath);
+            // 移除注释
+            const code = TreeTool.removeComment(content, 'wxml');
             // 获取目标路径
             const target = FileTool.getCopyTargetPath(output, filePath);
             // 开始复制
-            // TODO: 找一个移除注释的库
-            await fs.copy(filePath, target, {
-                overwrite: true, // 开启覆盖模式
-            });
+            await fs.outputFile(target, code);
         }
 
         // 提示
