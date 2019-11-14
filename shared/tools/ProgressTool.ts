@@ -8,7 +8,7 @@ import {
 let bar: progress.Bar;
 // 常量
 const BAR_THEME = progress.Presets.shades_classic; // 进度条样式主题
-const BAR_FORMAT = '解析进度：{bar} {percentage}% | 耗时: {duration}s | 详情: {value}/{total}';
+const BAR_FORMAT = '：{bar} {percentage}% | 耗时: {duration}s | 详情: {value}/{total}';
 
 /**
  * 进度工具类

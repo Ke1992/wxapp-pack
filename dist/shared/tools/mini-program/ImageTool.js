@@ -23,7 +23,7 @@ class ImageTool {
         PromptTool_1.default.info('开始解析Image');
         // 初始化进度条
         ProgressTool_1.default.init({
-            prefix: 'Image',
+            prefix: 'Image解析进度',
             total: 1,
         });
         // 开始解析wxs
@@ -39,6 +39,13 @@ class ImageTool {
     static async copy(output, { imageFiles }) {
         // 获取入口
         const entry = [...imageFiles];
+        // 提示
+        PromptTool_1.default.info('开始复制Image文件');
+        // 初始化进度条
+        ProgressTool_1.default.init({
+            prefix: 'Image复制进度',
+            total: entry.length,
+        });
         // 遍历复制
         for (let i = 0, len = entry.length; i < len; i += 1) {
             const filePath = entry[i];
@@ -48,9 +55,11 @@ class ImageTool {
             await fs.copy(filePath, target, {
                 overwrite: true,
             });
+            // 更新进度
+            ProgressTool_1.default.update();
         }
-        // 提示
-        PromptTool_1.default.log('Image文件复制完成！');
+        // 停止进度条
+        ProgressTool_1.default.stop();
     }
     // ------------------------------私有函数------------------------------
     /**

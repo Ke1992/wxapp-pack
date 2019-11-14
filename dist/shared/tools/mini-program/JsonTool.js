@@ -37,6 +37,13 @@ class JsonTool {
     static async copy(output, { jsonFiles }) {
         // 获取入口
         const entry = [...jsonFiles];
+        // 提示
+        PromptTool_1.default.info('开始复制JSON文件');
+        // 初始化进度条
+        ProgressTool_1.default.init({
+            prefix: 'JSON复制进度',
+            total: entry.length,
+        });
         // 遍历复制
         for (let i = 0, len = entry.length; i < len; i += 1) {
             const filePath = entry[i];
@@ -46,9 +53,11 @@ class JsonTool {
             await fs.copy(filePath, target, {
                 overwrite: true,
             });
+            // 更新进度
+            ProgressTool_1.default.update();
         }
-        // 提示
-        PromptTool_1.default.log('JSON文件复制完成！');
+        // 停止进度条
+        ProgressTool_1.default.stop();
     }
     // ------------------------------私有函数------------------------------
     /**

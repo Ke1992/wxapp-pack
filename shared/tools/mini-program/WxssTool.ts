@@ -36,6 +36,13 @@ export default class WxssTool {
         // 获取入口
         const entry = [...wxssFiles];
 
+        // 提示
+        PromptTool.info('开始复制WXSS文件');
+        // 初始化进度条
+        ProgressTool.init({
+            prefix: 'WXSS复制进度',
+            total: entry.length,
+        });
         // 遍历复制
         for (let i = 0, len = entry.length; i < len; i += 1) {
             const filePath = entry[i];
@@ -47,10 +54,11 @@ export default class WxssTool {
             const target = FileTool.getCopyTargetPath(output, filePath);
             // 开始复制
             await fs.outputFile(target, code);
+            // 更新进度
+            ProgressTool.update();
         }
-
-        // 提示
-        PromptTool.log('WXSS文件复制完成！');
+        // 停止进度条
+        ProgressTool.stop();
     }
 
     // ------------------------------私有函数------------------------------
@@ -76,7 +84,7 @@ export default class WxssTool {
 
         // 初始化进度条
         ProgressTool.init({
-            prefix: 'WXSS',
+            prefix: 'WXSS解析进度',
             total: entry.size,
         });
 

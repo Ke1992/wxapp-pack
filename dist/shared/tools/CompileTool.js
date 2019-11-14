@@ -19,8 +19,6 @@ class CompileTool {
         const { output, // 输出目录
         terserConfig, // js压缩配置
         babelGeneratorConfig, } = ConfigTool_1.default.init();
-        // 提示
-        PromptTool_1.default.info('开始复制文件');
         // 执行任务
         try {
             // 执行清理任务
@@ -50,6 +48,8 @@ class CompileTool {
      * @param output [输出目录]
      */
     static async clean(output) {
+        // 提示
+        PromptTool_1.default.info('开始清理文件');
         // 删除输出目录
         await fs.remove(output);
         // 提示

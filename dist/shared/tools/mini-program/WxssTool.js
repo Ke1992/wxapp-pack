@@ -31,6 +31,13 @@ class WxssTool {
     static async copy(output, { wxssFiles }) {
         // 获取入口
         const entry = [...wxssFiles];
+        // 提示
+        PromptTool_1.default.info('开始复制WXSS文件');
+        // 初始化进度条
+        ProgressTool_1.default.init({
+            prefix: 'WXSS复制进度',
+            total: entry.length,
+        });
         // 遍历复制
         for (let i = 0, len = entry.length; i < len; i += 1) {
             const filePath = entry[i];
@@ -42,9 +49,11 @@ class WxssTool {
             const target = FileTool_1.default.getCopyTargetPath(output, filePath);
             // 开始复制
             await fs.outputFile(target, code);
+            // 更新进度
+            ProgressTool_1.default.update();
         }
-        // 提示
-        PromptTool_1.default.log('WXSS文件复制完成！');
+        // 停止进度条
+        ProgressTool_1.default.stop();
     }
     // ------------------------------私有函数------------------------------
     /**
@@ -65,7 +74,7 @@ class WxssTool {
         });
         // 初始化进度条
         ProgressTool_1.default.init({
-            prefix: 'WXSS',
+            prefix: 'WXSS解析进度',
             total: entry.size,
         });
         // 遍历获取

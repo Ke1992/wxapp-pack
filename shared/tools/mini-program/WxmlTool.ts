@@ -37,6 +37,13 @@ export default class WxmlTool {
         // 获取入口
         const entry = [...wxmlFiles];
 
+        // 提示
+        PromptTool.info('开始复制WXML文件');
+        // 初始化进度条
+        ProgressTool.init({
+            prefix: 'WXML复制进度',
+            total: entry.length,
+        });
         // 遍历复制
         for (let i = 0, len = entry.length; i < len; i += 1) {
             const filePath = entry[i];
@@ -48,10 +55,11 @@ export default class WxmlTool {
             const target = FileTool.getCopyTargetPath(output, filePath);
             // 开始复制
             await fs.outputFile(target, code);
+            // 更新进度
+            ProgressTool.update();
         }
-
-        // 提示
-        PromptTool.log('WXML文件复制完成！');
+        // 停止进度条
+        ProgressTool.stop();
     }
 
     // ------------------------------私有函数------------------------------
@@ -75,7 +83,7 @@ export default class WxmlTool {
 
         // 初始化进度条
         ProgressTool.init({
-            prefix: 'WXML',
+            prefix: 'WXML解析进度',
             total: entry.size,
         });
 

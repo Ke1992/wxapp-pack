@@ -42,6 +42,13 @@ export default class JsonTool {
         // 获取入口
         const entry = [...jsonFiles];
 
+        // 提示
+        PromptTool.info('开始复制JSON文件');
+        // 初始化进度条
+        ProgressTool.init({
+            prefix: 'JSON复制进度',
+            total: entry.length,
+        });
         // 遍历复制
         for (let i = 0, len = entry.length; i < len; i += 1) {
             const filePath = entry[i];
@@ -51,10 +58,11 @@ export default class JsonTool {
             await fs.copy(filePath, target, {
                 overwrite: true, // 开启覆盖模式
             });
+            // 更新进度
+            ProgressTool.update();
         }
-
-        // 提示
-        PromptTool.log('JSON文件复制完成！');
+        // 停止进度条
+        ProgressTool.stop();
     }
 
     // ------------------------------私有函数------------------------------

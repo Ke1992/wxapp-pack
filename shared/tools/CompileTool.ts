@@ -32,9 +32,6 @@ export default class CompileTool {
             babelGeneratorConfig, // babel压缩配置
         } = ConfigTool.init();
 
-        // 提示
-        PromptTool.info('开始复制文件');
-
         // 执行任务
         try {
             // 执行清理任务
@@ -64,6 +61,8 @@ export default class CompileTool {
      * @param output [输出目录]
      */
     private static async clean(output: string): Promise<void> {
+        // 提示
+        PromptTool.info('开始清理文件');
         // 删除输出目录
         await fs.remove(output);
         // 提示

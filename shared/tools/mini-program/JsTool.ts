@@ -28,7 +28,7 @@ export default class JsTool {
         PromptTool.info('开始解析JS和JSON');
         // 初始化进度条
         ProgressTool.init({
-            prefix: 'JS和JSON',
+            prefix: 'JS和JSON解析进度',
             total: entry.size,
         });
         // 开始第一次解析JS
@@ -51,6 +51,13 @@ export default class JsTool {
         // 获取入口
         const entry = [...jsFiles];
 
+        // 提示
+        PromptTool.info('开始复制JS文件');
+        // 初始化进度条
+        ProgressTool.init({
+            prefix: 'JS复制进度',
+            total: entry.length,
+        });
         // 遍历复制
         for (let i = 0, len = entry.length; i < len; i += 1) {
             const filePath = entry[i];
@@ -69,10 +76,11 @@ export default class JsTool {
             const target = FileTool.getCopyTargetPath(output, filePath);
             // 开始复制（压缩代码）
             await fs.outputFile(target, code);
+            // 更新进度
+            ProgressTool.update();
         }
-
-        // 提示
-        PromptTool.log('JS文件复制完成！');
+        // 停止进度条
+        ProgressTool.stop();
     }
 
     /**
