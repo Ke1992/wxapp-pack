@@ -50,6 +50,10 @@ class WxmlAstTool extends AstBase_1.default {
     static getDependency(filePath) {
         // 包含wxs文件的结果
         const result = new Set();
+        // 如果文件不存在，则直接返回空
+        if (!fs.existsSync(filePath)) {
+            return [];
+        }
         // 获取文件内容
         const content = fs.readFileSync(filePath, 'utf8');
         // 开始解析wxml
