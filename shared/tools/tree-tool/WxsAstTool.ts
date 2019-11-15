@@ -3,6 +3,7 @@ import generate from '@babel/generator';
 import * as parser from '@babel/parser';
 // 自己的库
 import AstBase from './AstBase';
+import JsAstTool from './JsAstTool';
 // 定义
 import {
     TreeItem,
@@ -23,7 +24,7 @@ export default class WxsAstTool extends AstBase {
         const result: TreeItem = {};
 
         // 解析wxs文件
-        WxsAstTool.getDependencyFromPrecinct(entry, 'commonjs').forEach((item) => {
+        JsAstTool.getDependency(entry).forEach((item) => {
             const filePath = WxsAstTool.formatFilePath(item, entry, 'wxs');
 
             // 缓存中不存在，则进行递归

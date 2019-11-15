@@ -1,5 +1,12 @@
 // 库
+import {
+    StringLiteral,
+    CallExpression,
+} from '@babel/types';
+import * as fs from 'fs-extra';
 import * as terser from 'terser';
+import traverse from '@babel/traverse';
+import * as parser from '@babel/parser';
 // 自己的库
 import AstBase from './AstBase';
 // 定义
@@ -23,8 +30,7 @@ export default class JsAstTool extends AstBase {
         const result: TreeItem = {};
 
         // 获取解析结果
-        const source = JsAstTool.getDependencyFromPrecinct(entry, 'es6');
-
+        const source = JsAstTool.getDependency(entry);
         // 过滤.wxs文件
         JsAstTool.filterWxsFiles(entry, source, wxsFiles).forEach((item) => {
             const filePath = JsAstTool.formatFilePath(item, entry, 'js');
@@ -61,5 +67,73 @@ export default class JsAstTool extends AstBase {
         }
 
         return code;
+    }
+
+    /**
+     * 获取依赖文件
+     * @param filePath [文件路径]
+     */
+    public static getDependency(filePath: string): string[] {
+        // 包含wxs文件的结果
+        const result = new Set<string>();
+
+        // 如果文件不存在，则直接返回空
+        if (!fs.existsSync(filePath)) {
+            return [];
+        }
+
+        // 获取文件内容
+        const content = fs.readFileSync(filePath, 'utf8');
+        // 生成AST树
+        const ast = parser.parse(content, {
+            allowImportExportEverywhere: true, // 允许import和export出现在任意地方
+        });
+        // 遍历AST树
+        traverse(ast, {
+            // 参考precinct库中的detective-es库（https://github.com/dependents/node-detective-es6）
+            ImportDeclaration({ node }) {
+                if (node.importKind === 'type') {
+                    return;
+                }
+                // 对应引用存在才加入结果
+                node.source && node.source.value && result.add(node.source.value);
+            },
+            ExportAllDeclaration({ node }) {
+                // 对应引用存在才加入结果
+                node.source && node.source.value && result.add(node.source.value);
+            },
+            ExportNamedDeclaration({ node }) {
+                // 对应引用存在才加入结果
+                node.source && node.source.value && result.add(node.source.value);
+            },
+            CallExpression({ node }) {
+                // 对应引用存在才加入结果
+                // 该分支属于动态引入import，后续如果需要开启则启用babel以下配置
+                // plugins: [
+                //     'dynamicImport'
+                // ],
+                node.callee.type === 'Import' && node.arguments.length && result.add((node.arguments[0] as StringLiteral).value);
+            },
+            // 参考precinct库中的detective-cjs库（https://github.com/dependents/node-detective-cjs）
+            Identifier(nodePath) {
+                if (nodePath.node.name === 'require') {
+                    const parent = nodePath.parent as CallExpression;
+
+                    // 如果类型不等于CallExpression则直接返回
+                    if (parent.type !== 'CallExpression') {
+                        return;
+                    }
+
+                    const {
+                        value,
+                    } = parent.arguments[0] as StringLiteral;
+
+                    // 值存在才加入结果
+                    value && result.add(value);
+                }
+            },
+        });
+        // 返回结果
+        return [...result];
     }
 }

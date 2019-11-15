@@ -47,11 +47,3 @@ export interface TreeConfig {
     terser?: TerserConfig;
     generator?: BabelGeneratorConfig;
 }
-
-// precinct库参数
-export interface PrecinctOptions {
-    type?: string;
-    es6?: {
-        mixedImports: boolean;
-    };
-}

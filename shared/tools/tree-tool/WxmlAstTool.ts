@@ -1,5 +1,7 @@
 // 库
+import * as fs from 'fs-extra';
 import * as decomment from 'decomment';
+import * as htmlparser2 from 'htmlparser2';
 // 自己的库
 import AstBase from './AstBase';
 // 定义
@@ -22,7 +24,7 @@ export default class WxmlAstTool extends AstBase {
         const result: TreeItem = {};
 
         // 获取解析结果
-        const source = WxmlAstTool.getDependencyFromCheerio(entry);
+        const source = WxmlAstTool.getDependency(entry);
 
         // 过滤.wxs文件
         WxmlAstTool.filterWxsFiles(entry, source, wxsFiles).forEach((item) => {
@@ -48,5 +50,33 @@ export default class WxmlAstTool extends AstBase {
     public static removeComment(wxml: string): string {
         // 返回删除后的代码
         return decomment.html(wxml);
+    }
+
+    // ------------------------------私有函数------------------------------
+    /**
+     * 获取依赖文件
+     * @param filePath [文件路径]
+     */
+    private static getDependency(filePath: string): string[] {
+        // 包含wxs文件的结果
+        const result = new Set<string>();
+        // 获取文件内容
+        const content = fs.readFileSync(filePath, 'utf8');
+        // 开始解析wxml
+        const parser = new htmlparser2.Parser({
+            onopentag(name, { src }): void {
+                if (name === 'wxs' || name === 'import' || name === 'include') {
+                    // 值存在才加入结果
+                    src && result.add(src);
+                }
+            },
+        }, {
+            // 官方文档建议始终开启（https://github.com/fb55/htmlparser2/wiki/Parser-options）
+            decodeEntities: true,
+        });
+        parser.write(content);
+        parser.end();
+        // 返回结果
+        return [...result];
     }
 }

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // 库
+const fs = require("fs-extra");
 const postcss = require("postcss");
 // 自己的库
 const AstBase_1 = require("./AstBase");
@@ -17,7 +18,7 @@ class WxssAstTool extends AstBase_1.default {
         const visited = cache;
         const result = {};
         // 解析wxss文件
-        WxssAstTool.getDependencyFromPrecinct(entry, 'css').forEach((item) => {
+        WxssAstTool.getDependency(entry).forEach((item) => {
             const filePath = WxssAstTool.formatFilePath(item, entry, 'wxss');
             // 缓存中不存在，则进行递归
             if (!visited[filePath]) {
@@ -42,6 +43,27 @@ class WxssAstTool extends AstBase_1.default {
         });
         // 返回删除后的代码
         return ast.toString();
+    }
+    // ------------------------------私有函数------------------------------
+    /**
+     * 获取依赖文件
+     * @param filePath [文件路径]
+     */
+    static getDependency(filePath) {
+        // 包含wxs文件的结果
+        const result = new Set();
+        // 获取文件内容
+        const content = fs.readFileSync(filePath, 'utf8');
+        // 生成ast树
+        const ast = postcss.parse(content);
+        // 遍历import声明
+        ast.walkAtRules('import', (rule) => {
+            const src = rule.params.slice(1, -1);
+            // 值存在才加入结果
+            src && result.add(src);
+        });
+        // 返回结果
+        return [...result];
     }
 }
 exports.default = WxssAstTool;
