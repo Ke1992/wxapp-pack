@@ -17,4 +17,8 @@
 <view>{{requireData3}}</view>
 
 <view class="spacing"></view>
+<view>{{loopImportData}}</view>
+<view>{{loopRequireData}}</view>
+
+<view class="spacing"></view>
 <navigator url="/pages/sub_a/index">跳转sub_a</navigator>

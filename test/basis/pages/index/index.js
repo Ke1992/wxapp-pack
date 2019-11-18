@@ -8,6 +8,12 @@ import { namedData } from '../../models/exportNamed';
 // 测试 export * from 'xx'的场景
 import * as exportAllData from '../../models/exportAll';
 
+// 测试循环引用（import）
+import loopImportData from '../../models/loop/import_a';
+
+// 测试循环引用（require）
+const loopRequireData = require('../../models/loop/require_a');
+
 // 测试引入wxs文件
 const wxsData = require('../../tools/wxs');
 // 测试普通require
@@ -29,6 +35,9 @@ Page({
         requireData: requireData.data,
         // 测试require任意位置
         requireData3: `${require('../../models/require').data} in any position`,
+
+        loopImportData: `loop：${loopImportData}`,
+        loopRequireData: `loop： ${loopRequireData.data}`,
     },
 });
 
