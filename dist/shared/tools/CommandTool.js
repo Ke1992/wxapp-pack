@@ -18,6 +18,7 @@ class CommandTool {
             // 如果是空命令，则直接返回
             if (_.isEmpty(command)) {
                 resolve();
+                return;
             }
             // 准备执行命令
             PromptTool_1.default.info('开始执行编译命令');

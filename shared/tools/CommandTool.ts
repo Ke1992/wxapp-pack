@@ -19,6 +19,7 @@ export default class CommandTool {
             // 如果是空命令，则直接返回
             if (_.isEmpty(command)) {
                 resolve();
+                return;
             }
 
             // 准备执行命令
