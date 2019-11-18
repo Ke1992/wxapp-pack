@@ -20,13 +20,15 @@ class BuildTool {
     static getAllEntry(appJs, appJson) {
         const result = new Set([appJs]);
         // 获取主包和子包
-        const { pages, subPackages, } = fs.readJsonSync(appJson);
+        const { pages, subpackages, subPackages, } = fs.readJsonSync(appJson);
+        // 小程序兼容大小写
+        const packages = subpackages || subPackages;
         // 遍历主包
         pages.forEach((page) => {
             result.add(path.resolve(config_1.ROOT, `${page}.js`));
         });
         // 遍历子包
-        _.isArray(subPackages) && subPackages.forEach((item) => {
+        _.isArray(packages) && packages.forEach((item) => {
             // 遍历所有页面
             item.pages.forEach((page) => {
                 result.add(path.resolve(config_1.ROOT, item.root, `./${page}.js`));
