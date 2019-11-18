@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/sub_a",
+      "pages": [
+        "index"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTitleText": "wxapp-pack"
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -62,3 +62,6 @@ typings/
 
 # 自定义
 package-lock.json
+.wxapp-pack.json
+wxapp-pack-dist
+project.config.json

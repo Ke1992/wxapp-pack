@@ -1,0 +1,20 @@
+<view>index页面</view>
+
+<view class="spacing"></view>
+<view>{{importData}}</view>
+<view>{{importData2}}</view>
+
+<view class="spacing"></view>
+<view>{{exportNamedData}}</view>
+<view>{{exportAllData}}</view>
+
+<view class="spacing"></view>
+<view>{{wxsData}}</view>
+<view>{{minSuffixData}}</view>
+
+<view class="spacing"></view>
+<view>{{requireData}}</view>
+<view>{{requireData3}}</view>
+
+<view class="spacing"></view>
+<navigator url="/pages/sub_a/index">跳转sub_a</navigator>
