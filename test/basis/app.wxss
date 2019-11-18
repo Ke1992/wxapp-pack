@@ -1,6 +1,6 @@
 view {
     color: #333;
-    line-height: 50rpx;
+    line-height: 40rpx;
 }
 
 navigator {
