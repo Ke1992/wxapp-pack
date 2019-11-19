@@ -87,7 +87,7 @@ class JsonTool {
                             return;
                         }
                         // 组件的绝对路径
-                        const jsPath = FileTool_1.default.getAbsolutePath(item, `${value}.js`);
+                        const jsPath = FileTool_1.default.getComponentPath(item, value);
                         // 新文件
                         if (!jsFiles.has(jsPath)) {
                             // 校验文件是否存在

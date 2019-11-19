@@ -111,4 +111,26 @@ export default class FileTool {
     public static getCopyTargetPath(output: string, filePath: string): string {
         return path.join(output, filePath.replace(ROOT_PATH, ''));
     }
+
+    /**
+     * 获取json引用的组件路径
+     * @param entry     [分析入口]
+     * @param component [引用的组件]
+     */
+    public static getComponentPath(entry: string, component: string): string {
+        const result = FileTool.getAbsolutePath(entry, `${component}.js`);
+        // 组件的上级目录
+        const dirPath = result.slice(0, -3);
+
+        // 文件不存在 && 上级目录存在 && 是模糊匹配（即指定了文件夹）
+        if (
+            !fs.existsSync(result) && fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()
+        ) {
+            // 返回补全后路径
+            return FileTool.getAbsolutePath(entry, `${component}/index.js`);
+        }
+
+        // 返回结果
+        return result;
+    }
 }

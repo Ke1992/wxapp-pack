@@ -98,8 +98,10 @@ export default class JsonTool {
                         if (value.indexOf('plugin://') === 0) {
                             return;
                         }
+
                         // 组件的绝对路径
-                        const jsPath = FileTool.getAbsolutePath(item, `${value}.js`);
+                        const jsPath = FileTool.getComponentPath(item, value);
+
                         // 新文件
                         if (!jsFiles.has(jsPath)) {
                             // 校验文件是否存在
