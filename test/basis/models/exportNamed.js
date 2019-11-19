@@ -1,3 +1,4 @@
+// 同时测试一下省略后缀
 export {
     namedData,
 } from './mock';
