@@ -25,6 +25,8 @@
 <tips content="this is tips component" />
 <!-- 测试详细匹配组件 -->
 <info content="this is info component" />
+<!-- 测试绝对路径匹配组件 -->
+<absolute content="this is absolute component" />
 
 <view class="spacing"></view>
 <navigator url="/pages/sub_a/index">跳转sub_a</navigator>

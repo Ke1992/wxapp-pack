@@ -1,5 +1,5 @@
 // 测试普通的import
-import importData from '../../models/import';
+import importData from '../../models/import.js';
 // 测试.min场景
 import minSuffixData from '../../tools/suffix.min';
 

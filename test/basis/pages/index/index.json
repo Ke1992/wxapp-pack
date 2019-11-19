@@ -1,6 +1,7 @@
 {
     "usingComponents": {
         "tips": "../../components/tips",
-        "info": "../../components/info/info"
+        "info": "../../components/info/info",
+        "absolute": "/components/absolute/index"
     }
 }
