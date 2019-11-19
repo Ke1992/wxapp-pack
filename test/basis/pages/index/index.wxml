@@ -4,7 +4,7 @@
 <wxs module="tools2">
     // 测试内嵌wxs注释是否可删除
     module.exports = {
-        data: 'this is wxs2 data',
+        data: 'this is inner wxs data',
     };
 </wxs>
 <!-- 测试普通import -->

@@ -1,3 +1,8 @@
+// 测试普通的引用wxs
+var wxs2 = require('./wxs2.wxs');
+// 测试引用不存在的wxs
+var wxs3 = require('./wxs3.wxs');
+
 module.exports = {
-    data: 'this is wxs data',
+    data: 'this is wxs data, ' + wxs2.data + ', ' + wxs3,
 };

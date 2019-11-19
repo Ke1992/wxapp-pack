@@ -1,0 +1,3 @@
+module.exports = {
+    data: 'this is wxs2 data',
+};

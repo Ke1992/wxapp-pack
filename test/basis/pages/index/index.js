@@ -34,7 +34,7 @@ Page({
         requireData3: `${require('../../models/require').data} in any position`,
 
         loopImportData: `loop：${loopImportData}`,
-        loopRequireData: `loop： ${loopRequireData.data}`,
+        loopRequireData: `loop：${loopRequireData.data}`,
     },
 });
 
