@@ -2,3 +2,11 @@
 @import '../../components/common.wxss';
 /* 测试绝对路径引入（同时测试省略后缀） */
 @import '/components/absolute';
+
+image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100rpx;
+    height: 100rpx;
+}

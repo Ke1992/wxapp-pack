@@ -62,3 +62,6 @@
 
 <view class="spacing"></view>
 <navigator url="/pages/sub_a/index">跳转sub_a</navigator>
+
+<!-- 测试图片复制 -->
+<image src="../../assets/images/timg.png" />
