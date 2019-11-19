@@ -1,0 +1,4 @@
+/* 测试普通引入 */
+@import '../../components/common.wxss';
+/* 测试绝对路径引入 */
+@import '/components/absolute.wxss';

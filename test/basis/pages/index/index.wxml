@@ -1,4 +1,4 @@
-<view>index页面</view>
+<view class="title">index页面</view>
 
 <view class="spacing"></view>
 <view>{{importData}}</view>
