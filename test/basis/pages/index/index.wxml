@@ -1,3 +1,19 @@
+<!-- 测试普通wxs -->
+<wxs src="../../tools/wxs.wxs" module="tools" />
+<!-- 测试内嵌wxs -->
+<wxs module="tools2">
+    // 测试内嵌wxs注释是否可删除
+    module.exports = {
+        data: 'this is wxs2 data',
+    };
+</wxs>
+<!-- 测试普通import -->
+<import src="../../components/template/import.wxml" />
+<!-- 测试绝对路径import -->
+<import src="/components/template/import2.wxml" />
+<!-- 测试省略后缀import -->
+<import src="/components/template/import3.wxml" />
+
 <view class="title">index页面</view>
 
 <view class="spacing"></view>
@@ -9,7 +25,6 @@
 <view>{{exportAllData}}</view>
 
 <view class="spacing"></view>
-<view>{{wxsData}}</view>
 <view>{{minSuffixData}}</view>
 
 <view class="spacing"></view>
@@ -27,6 +42,23 @@
 <info content="this is info component" />
 <!-- 测试绝对路径匹配组件 -->
 <absolute content="this is absolute component" />
+
+<view class="spacing"></view>
+<view>{{tools.data}}</view>
+<view>{{tools2.data}}</view>
+
+<view class="spacing"></view>
+<template is="import" data="{{ content: 'this is import template data' }}" />
+<template is="import2" data="{{ content: 'this is absolute import template data' }}" />
+<template is="import3" data="{{ content: 'this is ellipsis import template data' }}" />
+
+<view class="spacing"></view>
+<!-- 测试普通include -->
+<include src="../../components/template/include.wxml" />
+<!-- 测试绝对路径include -->
+<include src="/components/template/include2.wxml" />
+<!-- 测试省略后缀include -->
+<include src="../../components/template/include3" />
 
 <view class="spacing"></view>
 <navigator url="/pages/sub_a/index">跳转sub_a</navigator>

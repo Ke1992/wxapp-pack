@@ -14,8 +14,6 @@ import loopImportData from '../../models/loop/import_a';
 // 测试循环引用（require）
 const loopRequireData = require('../../models/loop/require_a');
 
-// 测试引入wxs文件
-const wxsData = require('../../tools/wxs');
 // 测试普通require
 const requireData = require('../../models/require.js');
 // 测试require不存在文件
@@ -30,7 +28,6 @@ Page({
         exportAllData: exportAllData.allData,
 
         minSuffixData,
-        wxsData: wxsData.data,
 
         requireData: requireData.data,
         // 测试require任意位置（同时测试省略后缀）
