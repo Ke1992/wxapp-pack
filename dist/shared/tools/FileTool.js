@@ -107,5 +107,52 @@ class FileTool {
         // 返回结果
         return result;
     }
+    /**
+     * 获取对应目录下所有文件
+     * @param entry        [入口路径]]
+     * @param root         [根目录]
+     * @param imageExtList [图片后缀白名单]
+     */
+    static getAllFile(entry, root, imageExtList) {
+        const result = {
+            js: [],
+            wxs: [],
+            json: [],
+            wxml: [],
+            wxss: [],
+            image: [],
+        };
+        // 获取目录下的所有文件
+        fs.readdirSync(entry).forEach((item) => {
+            // 获取后缀
+            const ext = path.extname(item);
+            const filePath = path.resolve(entry, './', item); // 绝对路径
+            if (ext === '.js') {
+                result.js.push(filePath.replace(root, ''));
+            }
+            else if (ext === '.wxs') {
+                result.wxs.push(filePath.replace(root, ''));
+            }
+            else if (ext === '.json') {
+                result.json.push(filePath.replace(root, ''));
+            }
+            else if (ext === '.wxml') {
+                result.wxml.push(filePath.replace(root, ''));
+            }
+            else if (ext === '.wxss') {
+                result.wxss.push(filePath.replace(root, ''));
+            }
+            else if (imageExtList.includes(ext)) {
+                result.image.push(filePath.replace(root, ''));
+            }
+            else if (filePath.indexOf('node_modules') < 0 && fs.statSync(filePath).isDirectory()) {
+                // 非node_modules && 对目录进行递归
+                const source = FileTool.getAllFile(filePath, root, imageExtList);
+                // 遍历填充
+                config_1.RESULT_FILE_KEY.forEach((key) => result[key].push(...source[key]));
+            }
+        });
+        return result;
+    }
 }
 exports.default = FileTool;

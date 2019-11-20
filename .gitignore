@@ -61,7 +61,9 @@ typings/
 .next
 
 # 自定义
-package-lock.json
 .wxapp-pack.json
-wxapp-pack-dist
+package-lock.json
 project.config.json
+
+wxapp-pack-dist
+wxapp-pack-analyse

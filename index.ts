@@ -5,6 +5,7 @@ import * as program from 'commander';
 import {
     build,
     config,
+    analyse,
 } from './command';
 
 // 配置
@@ -24,6 +25,15 @@ program
     .description('使用模块依赖分析模式编译项目')
     .action(({ smart }) => {
         build(smart);
+    });
+
+// 注册分析命令
+program
+    .command('analyse')
+    .alias('a')
+    .description('分析未使用文件、绘制模块依赖图（强依赖Graphviz）')
+    .action(() => {
+        analyse();
     });
 
 // 注册配置命令

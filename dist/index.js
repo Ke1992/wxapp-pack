@@ -19,6 +19,14 @@ program
     .action(({ smart }) => {
     command_1.build(smart);
 });
+// 注册分析命令
+program
+    .command('analyse')
+    .alias('a')
+    .description('分析未使用文件、绘制模块依赖图（强依赖Graphviz）')
+    .action(() => {
+    command_1.analyse();
+});
 // 注册配置命令
 program
     .command('config')

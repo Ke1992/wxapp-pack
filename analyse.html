@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>分析结果</title>
+		<meta charset="utf-8">
+		<style type="text/css">
+			body {
+				margin: 0;
+				padding: 0;
+				background-color: #F0F3F4;
+				font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			}
+			nav {
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 1;
+				width: 100%;
+				height: 60px;
+				line-height: 60px;
+				background-color: #FFFFFF;
+				box-shadow: 0 1px 0px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
+				-webkit-box-shadow: 0 1px 0px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
+			}
+			nav div {
+				width: 100%;
+				margin: auto;
+				padding: 0 35px;
+				max-width: 1000px;
+				box-sizing: border-box;
+			}
+			nav span {
+				color: #2196F3;
+				margin: 0 12px;
+				cursor: pointer;
+				font-size: 14px;
+				font-weight: bold;
+				line-height: 30px;
+				display: inline-block;
+			}
+			nav span:hover {
+				border-bottom: 2px solid;
+			}
+			.main {
+				width: 100%;
+				margin: auto;
+				padding: 0 35px;
+				max-width: 1000px;
+				padding-top: 100px;
+				box-sizing: border-box;
+			}
+			.wrap {
+				width: 100%;
+				padding: 0 20px;
+				margin-bottom: 30px;
+				box-sizing: border-box;
+				background-color: #FFFFFF;
+				box-shadow: 0 1px 0px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
+				-webkit-box-shadow: 0 1px 0px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
+			}
+			.wrap.mini {
+				height: 50px;
+				overflow: hidden;
+			}
+			.wrap .top {
+				position: relative;
+				width: 100%;
+				height: 38px;
+				color: #58666E;
+				font-size: 18px;
+				line-height: 50px;
+				font-weight: bold;
+			}
+			.wrap .top .btn {
+				position: absolute;
+				right: 0;
+				top: 12px;
+				width: 20px;
+				height: 20px;
+				cursor: pointer;
+				background-size: 100%;
+				background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABlklEQVRYR+2Vu0rEQBSGz8wUYmNhY2Ph2voAgiD4CFoEV7cTV7yt7L6HRTB4C2qzsBgEQXwCEfQNLNUFm+3Vxp2MJJgxbiaTuQjbJF2SmfN9+WfmBMGQLzRkPpQCZQJlAmUCwgRW6jsz7+jr5db3P/+jUTlOaxTG+5WrU+9psF5GYHmjcYQAbQFjb0DI/OWJ+2ojUd1sTgGl94DQJAN2HPjedrreHwEOT0ZYSqThvOSABBfIwC0lRPCUhBv4Xiu6jwWq9b0lQHCdG7VmEjI4lwhhMTg7uIkFnPXdCkH4ERBM2EqowIFBD4d0tnN+2OVLsLrWnA5J+GAjoQyneK5z4T7zJUi+2kbCBJ4RiB6YSJjChQK6EnF6P+c8f/9AD6diz+0D6ReKSXQBgERNxgSem4DWnpC1yWi353x5Mq3wb6iUhEhCAV6YgHESinBlAeWNGQ3UgGsJKElowrUFpBIGcCMBoYQh3FjgV4LeAQKG+2Qh6e2yUyl6V3gMZQVrtcYYxiO03d7/0AUr9wHTwqrzrBJQhcjGfQO04RAw6treagAAAABJRU5ErkJggg==");
+			}
+			.wrap .top .btn.up {
+				background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACGUlEQVRYR+2WO0gcURSG/zMzKyghIAiCNsEmhU2aFEkkig9SpLEZ1tUqslkfcVcWy4CNtrLqiI9hK8HsyoCksUgQEy2EkCZNijQhTRICAUMIEXRnThh1lnUfs3euggT2lJdz7/fdM9xzhnDNQdfMR02gVoFaBf7vCgwMT7QcaxpvmfPfZfuJdAUGYvHHDHrpggncnzWNbRkJKQEPToDmQhnIyUoEFiiGe7eWlQgkUAl+GQlhgWpwWQkhAVG4jERVgaDwoBK+ArLwIBIVBQThX85htyr1gGqvo6yAIPyzragPXbDq2PsA2mQkSgRE4Ax8UhzqzKQXfrjQSHSymRU+kJG4ICAMR6gjY879LLyxK+EovEfA7SCVyAuIwMH8kaiuqxjuASOxqSbm47cgaheVOBXQR57dU1jd93p7uc3M+KBqJ90vVlYO/YbO4NhYo50L7RLhjr8EdWTNhXenApHoZB8r/LriBsZ77S/3bmwYv0Um3tBQ/Gaugfb8JMhxejLppd38JwhHE7Ok4HkJgHFgh3KPrOXlPyJwL+dcYocId8vsm8mai9Nno7wgwrH4BIGM/JIL/6X2WlbqKAjcy9XHx2+oJ9orEO67a8zMICQ2TWPJyyl5huGRxBNiXmPgjXOo9cvC8xJ6sl5ptLfBeADmp5tpY73wMmUbkT6abLVWU9/O/jWuJEgfTbZYq6mvxadVHUZXgvc5pCbwD/dYAzALhoJBAAAAAElFTkSuQmCC")
+			}
+			.wrap .content {
+				width: 100%;
+				color: #918C8C;
+				padding-bottom: 10px;
+			}
+			.wrap .content div {
+				width: 100%;
+				padding: 10px 0;
+				word-break: break-all;
+				border-bottom: 1px solid rgb(221, 221, 221);
+			}
+			.wrap .content div:last-child {
+				border: none;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav>
+			<div id="nav">
+				<span>JS</span>
+				<span>JSON</span>
+				<span>WXML</span>
+				<span>WXS</span>
+				<span>WXSS</span>
+				<span>Image</span>
+			</div>
+		</nav>
+		<!-- 内容区 -->
+		<section class="main">
+			<div id="wrap_js" class="wrap">
+				<div class="top">
+					<div>JS（ {_js_len_} 个文件）</div>
+					<div class="btn up"></div>
+				</div>
+				<div class="content">{_js_}</div>
+			</div>
+			<div id="wrap_json" class="wrap">
+				<div class="top">
+					<div>JSON（ {_json_len_} 个文件）</div>
+					<div class="btn up"></div>
+				</div>
+				<div class="content">{_json_}</div>
+			</div>
+			<div id="wrap_wxml" class="wrap">
+				<div class="top">
+					<div>WXML（ {_wxml_len_} 个文件）</div>
+					<div class="btn up"></div>
+				</div>
+				<div class="content">{_wxml_}</div>
+			</div>
+			<div id="wrap_wxs" class="wrap">
+				<div class="top">
+					<div>WXS（ {_wxs_len_} 个文件）</div>
+					<div class="btn up"></div>
+				</div>
+				<div class="content">{_wxs_}</div>
+			</div>
+			<div id="wrap_wxss" class="wrap">
+				<div class="top">
+					<div>WXSS（ {_wxss_len_} 个文件）</div>
+					<div class="btn up"></div>
+				</div>
+				<div class="content">{_wxss_}</div>
+			</div>
+			<div id="wrap_image" class="wrap">
+				<div class="top">
+					<div>Image（jpg、png和gif）（ {_image_len_} 个文件）</div>
+					<div class="btn up"></div>
+				</div>
+				<div class="content">{_image_}</div>
+			</div>
+		</section>
+
+		<script type="text/javascript">
+			document.querySelectorAll('#nav span').forEach(item => {
+				item.addEventListener('click', function() {
+					const key = this.innerHTML.toLocaleLowerCase();
+
+					window.scrollTo(0, document.getElementById(`wrap_${key}`).offsetTop - 88);
+				});
+			});
+			document.querySelectorAll('.btn').forEach(item => {
+				item.addEventListener('click', function() {
+					if (this.classList.contains('up')) {
+						this.classList.remove('up');
+						this.parentElement.parentElement.classList.add('mini');
+					} else {
+						this.classList.add('up');
+						this.parentElement.parentElement.classList.remove('mini');
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

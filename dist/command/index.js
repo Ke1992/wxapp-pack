@@ -6,3 +6,6 @@ exports.build = build_1.default;
 // 配置命令
 const config_1 = require("./config");
 exports.config = config_1.default;
+// 分析命令
+const analyse_1 = require("./analyse");
+exports.analyse = analyse_1.default;
