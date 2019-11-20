@@ -21,17 +21,23 @@ export default class BuildTool {
      * 获取所有入口路径
      * @param appJs   [app.js]
      * @param appJson [app.json]
+     * @param result  [编辑结果]
      */
-    public static getAllEntry(appJs: string, appJson: string): Set<string> {
+    public static getAllEntry(appJs: string, appJson: string, { jsonFiles }: Result): Set<string> {
         const result = new Set<string>([appJs]);
         // 获取主包和子包
         const {
             pages,
             subpackages,
             subPackages,
+            sitemapLocation,
         } = fs.readJsonSync(appJson);
         // 小程序兼容大小写
         const packages = subpackages || subPackages;
+
+        // 特殊文件sitemap.json
+        const sitemapJson = path.resolve(ROOT, sitemapLocation || 'sitemap.json');
+        fs.existsSync(sitemapJson) && jsonFiles.add(sitemapJson);
 
         // 遍历主包
         pages.forEach((page: string) => {

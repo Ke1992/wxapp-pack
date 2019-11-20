@@ -78,11 +78,9 @@ export default async function build(smart = false): Promise<void> {
     await CommandTool.execute(before);
     // 执行智能分包逻辑
     // TODO: 后续增加智能分包逻辑
-    // 特殊文件sitemap.json
-    const sitemapJson = path.resolve(ROOT, 'sitemap.json');
-    fs.existsSync(sitemapJson) && result.jsonFiles.add(sitemapJson);
+
     // 获取所有入口路径
-    const entry = BuildTool.getAllEntry(appJs, appJson);
+    const entry = BuildTool.getAllEntry(appJs, appJson, result);
 
     // 获取js和json
     JsTool.getFiles(entry, result);
