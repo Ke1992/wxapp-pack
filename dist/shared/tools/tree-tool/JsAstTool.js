@@ -6,6 +6,8 @@ const traverse_1 = require("@babel/traverse");
 const parser = require("@babel/parser");
 // 自己的库
 const AstBase_1 = require("./AstBase");
+// 变量
+const visited = {};
 /**
  * JS AST解析工具类
  */
@@ -13,11 +15,9 @@ class JsAstTool extends AstBase_1.default {
     /**
      * 获取AST树
      * @param entry    [入口路径]
-     * @param cache    [解析结果缓存]
      * @param wxsFiles [.wxs文件]
      */
-    static getAst(entry, cache, wxsFiles) {
-        const visited = cache;
+    static getAst(entry, wxsFiles) {
         const result = {};
         // 获取解析结果
         const source = JsAstTool.getDependency(entry);
@@ -28,7 +28,7 @@ class JsAstTool extends AstBase_1.default {
             if (!visited[filePath]) {
                 // TODO: 怎么解决死循环的问题，暂时全部都先用空对象来解决
                 visited[filePath] = {};
-                visited[filePath] = JsAstTool.getAst(filePath, visited, wxsFiles);
+                visited[filePath] = JsAstTool.getAst(filePath, wxsFiles);
             }
             // 赋值
             result[filePath] = visited[filePath];

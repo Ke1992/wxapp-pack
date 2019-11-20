@@ -13,7 +13,6 @@ import {
     TreeConfig,
 } from '../../interface';
 // 变量
-const visited: TreeItem = {};
 let wxsFiles: Set<string>;
 
 /**
@@ -94,28 +93,28 @@ export default class TreeTool {
         // 解析JS
         if (ext === '.js') {
             return {
-                [entry]: JsAstTool.getAst(entry, visited, wxsFiles),
+                [entry]: JsAstTool.getAst(entry, wxsFiles),
             };
         }
 
         // 解析WXML
         if (ext === '.wxml') {
             return {
-                [entry]: WxmlAstTool.getAst(entry, visited, wxsFiles),
+                [entry]: WxmlAstTool.getAst(entry, wxsFiles),
             };
         }
 
         // 解析WXS
         if (ext === '.wxs') {
             return {
-                [entry]: WxsAstTool.getAst(entry, visited),
+                [entry]: WxsAstTool.getAst(entry),
             };
         }
 
         // 解析WXSS
         if (ext === '.wxss') {
             return {
-                [entry]: WxssAstTool.getAst(entry, visited),
+                [entry]: WxssAstTool.getAst(entry),
             };
         }
 

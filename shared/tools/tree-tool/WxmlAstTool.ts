@@ -8,6 +8,8 @@ import AstBase from './AstBase';
 import {
     TreeItem,
 } from '../../interface';
+// 变量
+const visited: TreeItem = {};
 
 /**
  * WXML AST解析工具类
@@ -16,11 +18,9 @@ export default class WxmlAstTool extends AstBase {
     /**
      * 获取AST树
      * @param entry    [入口路径]
-     * @param cache    [解析结果缓存]
      * @param wxsFiles [.wxs文件]
      */
-    public static getAst(entry: string, cache: TreeItem, wxsFiles: Set<string>): TreeItem {
-        const visited = cache;
+    public static getAst(entry: string, wxsFiles: Set<string>): TreeItem {
         const result: TreeItem = {};
 
         // 获取解析结果
@@ -33,7 +33,7 @@ export default class WxmlAstTool extends AstBase {
             // 缓存中不存在，则进行递归
             if (!visited[filePath]) {
                 visited[filePath] = {};
-                visited[filePath] = WxmlAstTool.getAst(filePath, visited, wxsFiles);
+                visited[filePath] = WxmlAstTool.getAst(filePath, wxsFiles);
             }
 
             // 赋值

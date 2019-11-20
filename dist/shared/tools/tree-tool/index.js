@@ -9,7 +9,6 @@ const WxsAstTool_1 = require("./WxsAstTool");
 const WxmlAstTool_1 = require("./WxmlAstTool");
 const WxssAstTool_1 = require("./WxssAstTool");
 // 变量
-const visited = {};
 let wxsFiles;
 /**
  * 依赖分析树工具类
@@ -78,25 +77,25 @@ class TreeTool {
         // 解析JS
         if (ext === '.js') {
             return {
-                [entry]: JsAstTool_1.default.getAst(entry, visited, wxsFiles),
+                [entry]: JsAstTool_1.default.getAst(entry, wxsFiles),
             };
         }
         // 解析WXML
         if (ext === '.wxml') {
             return {
-                [entry]: WxmlAstTool_1.default.getAst(entry, visited, wxsFiles),
+                [entry]: WxmlAstTool_1.default.getAst(entry, wxsFiles),
             };
         }
         // 解析WXS
         if (ext === '.wxs') {
             return {
-                [entry]: WxsAstTool_1.default.getAst(entry, visited),
+                [entry]: WxsAstTool_1.default.getAst(entry),
             };
         }
         // 解析WXSS
         if (ext === '.wxss') {
             return {
-                [entry]: WxssAstTool_1.default.getAst(entry, visited),
+                [entry]: WxssAstTool_1.default.getAst(entry),
             };
         }
         // 兜底

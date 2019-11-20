@@ -9,6 +9,8 @@ import {
     TreeItem,
     BabelGeneratorConfig,
 } from '../../interface';
+// 变量
+const visited: TreeItem = {};
 
 /**
  * WXS AST解析工具类
@@ -17,10 +19,8 @@ export default class WxsAstTool extends AstBase {
     /**
      * 获取AST树
      * @param entry [入口路径]
-     * @param cache [解析结果缓存]
      */
-    public static getAst(entry: string, cache: TreeItem): TreeItem {
-        const visited = cache;
+    public static getAst(entry: string): TreeItem {
         const result: TreeItem = {};
 
         // 解析wxs文件
@@ -30,7 +30,7 @@ export default class WxsAstTool extends AstBase {
             // 缓存中不存在，则进行递归
             if (!visited[filePath]) {
                 visited[filePath] = {};
-                visited[filePath] = WxsAstTool.getAst(filePath, visited);
+                visited[filePath] = WxsAstTool.getAst(filePath);
             }
 
             // 赋值

@@ -6,6 +6,8 @@ const parser = require("@babel/parser");
 // 自己的库
 const AstBase_1 = require("./AstBase");
 const JsAstTool_1 = require("./JsAstTool");
+// 变量
+const visited = {};
 /**
  * WXS AST解析工具类
  */
@@ -13,10 +15,8 @@ class WxsAstTool extends AstBase_1.default {
     /**
      * 获取AST树
      * @param entry [入口路径]
-     * @param cache [解析结果缓存]
      */
-    static getAst(entry, cache) {
-        const visited = cache;
+    static getAst(entry) {
         const result = {};
         // 解析wxs文件
         JsAstTool_1.default.getDependency(entry).forEach((item) => {
@@ -24,7 +24,7 @@ class WxsAstTool extends AstBase_1.default {
             // 缓存中不存在，则进行递归
             if (!visited[filePath]) {
                 visited[filePath] = {};
-                visited[filePath] = WxsAstTool.getAst(filePath, visited);
+                visited[filePath] = WxsAstTool.getAst(filePath);
             }
             // 赋值
             result[filePath] = visited[filePath];

@@ -14,6 +14,8 @@ import {
     TreeItem,
     TerserConfig,
 } from '../../interface';
+// 变量
+const visited: TreeItem = {};
 
 /**
  * JS AST解析工具类
@@ -22,11 +24,9 @@ export default class JsAstTool extends AstBase {
     /**
      * 获取AST树
      * @param entry    [入口路径]
-     * @param cache    [解析结果缓存]
      * @param wxsFiles [.wxs文件]
      */
-    public static getAst(entry: string, cache: TreeItem, wxsFiles: Set<string>): TreeItem {
-        const visited = cache;
+    public static getAst(entry: string, wxsFiles: Set<string>): TreeItem {
         const result: TreeItem = {};
 
         // 获取解析结果
@@ -39,7 +39,7 @@ export default class JsAstTool extends AstBase {
             if (!visited[filePath]) {
                 // TODO: 怎么解决死循环的问题，暂时全部都先用空对象来解决
                 visited[filePath] = {};
-                visited[filePath] = JsAstTool.getAst(filePath, visited, wxsFiles);
+                visited[filePath] = JsAstTool.getAst(filePath, wxsFiles);
             }
 
             // 赋值
