@@ -1,6 +1,8 @@
 ### 1、入口   
 &emsp;&emsp;主包、子包和sitemap.json   
 &emsp;&emsp;子包允许subpackages、subPackages   
+&emsp;&emsp;sitemapLocation配置   
+&emsp;&emsp;workers
 ### 2、JS   
 &emsp;&emsp;import（普通、任意位置、省略后缀）   
 &emsp;&emsp;require（普通、不存在的文件、任意位置、省略后缀）   
