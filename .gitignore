@@ -65,5 +65,6 @@ typings/
 package-lock.json
 project.config.json
 
+dist
 wxapp-pack-dist
 wxapp-pack-analyse
