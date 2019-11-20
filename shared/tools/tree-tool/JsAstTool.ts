@@ -130,6 +130,24 @@ export default class JsAstTool extends AstBase {
 
                     // 值存在才加入结果
                     value && result.add(value);
+                } else if (nodePath.node.name === 'createWorker') {
+                    // 处理小程序的worker场景
+                    if (nodePath.parentPath && nodePath.parentPath.parent) {
+                        // 获取祖先节点
+                        const ancestor = nodePath.parentPath.parent as CallExpression;
+
+                        // 如果类型不等于CallExpression则直接返回
+                        if (ancestor.type !== 'CallExpression') {
+                            return;
+                        }
+
+                        const {
+                            value,
+                        } = ancestor.arguments[0] as StringLiteral;
+
+                        // 值存在才加入结果（必须保证是根目录，因为小程序要求必须是根目录）
+                        value && result.add(`/${value}`);
+                    }
                 }
             },
         });
