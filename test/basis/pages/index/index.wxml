@@ -25,6 +25,7 @@
 <view>{{exportAllData}}</view>
 
 <view class="spacing"></view>
+<view>{{workerData}}</view>
 <view>{{minSuffixData}}</view>
 
 <view class="spacing"></view>
@@ -36,6 +37,10 @@
 <view>{{loopRequireData}}</view>
 
 <view class="spacing"></view>
+<!-- 测试全局组件  -->
+<global content="this is global component" />
+<!-- 测试全局组件（绝对路径）  -->
+<globalAbsolute content="this is global absolute component" />
 <!-- 测试模糊匹配组件  -->
 <tips content="this is tips component" />
 <!-- 测试详细匹配组件 -->

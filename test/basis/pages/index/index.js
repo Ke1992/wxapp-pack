@@ -28,6 +28,7 @@ Page({
         exportAllData: exportAllData.allData,
 
         minSuffixData,
+        workerData: '',
 
         requireData: requireData.data,
         // 测试require任意位置（同时测试省略后缀）
@@ -35,6 +36,20 @@ Page({
 
         loopImportData: `loop：${loopImportData}`,
         loopRequireData: `loop：${loopRequireData.data}`,
+    },
+    onLoad() {
+        // 测试worker
+        const worker = wx.createWorker('tools/workers/index.js');
+        // 接收消息（需要真机才能测试）
+        worker.onMessage((res) => {
+            this.setData({
+                workerData: res.data,
+            });
+        });
+        // 发送消息
+        worker.postMessage({
+            msg: 'hello worker',
+        });
     },
 });
 

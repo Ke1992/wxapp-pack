@@ -10,8 +10,13 @@
       ]
     }
   ],
+  "usingComponents": {
+    "global": "/components/global/index",
+    "globalAbsolute": "/components/global/index"
+  },
   "window": {
     "navigationBarTitleText": "wxapp-pack"
   },
-  "sitemapLocation": "sitemap.json"
+  "workers": "tools/workers",
+  "sitemapLocation": "others/sitemap.json"
 }
