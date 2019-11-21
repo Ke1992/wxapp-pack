@@ -1,2 +1,8 @@
-/* 测试普通引入 */
-@import '../../components/common.wxss';
+/* 测试dir场景 */
+@import 'common/common.wxss';
+/* 测试./dir场景 */
+@import './common/common2.wxss';
+/* 测试../dir场景 */
+@import '../../components/sub_a_wxss.wxss';
+/* 测试/dir场景 */
+@import '/components/sub_a_wxss2.wxss';
