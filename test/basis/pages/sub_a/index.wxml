@@ -1,2 +1,13 @@
 <view class="title">sub_a页面</view>
+
+<view class="spacing"></view>
 <view>{{importData}}</view>
+<view>{{importData2}}</view>
+<view>{{importData3}}</view>
+<view>{{importData4}}</view>
+
+<view class="spacing"></view>
+<view>{{requireData}}</view>
+<view>{{requireData2}}</view>
+<view>{{requireData3}}</view>
+<view>{{requireData4}}</view>

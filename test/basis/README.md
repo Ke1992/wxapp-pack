@@ -10,6 +10,7 @@
 &emsp;&emsp;export {a} from '';   
 &emsp;&emsp;.min后缀   
 &emsp;&emsp;循环引用   
+&emsp;&emsp;dir、./dir、../dir、/dir
 ### 3、JSON（usingComponents）   
 &emsp;&emsp;文件级引用（xx/xx/compontent）   
 &emsp;&emsp;文件夹级引用（xx/xx）   
