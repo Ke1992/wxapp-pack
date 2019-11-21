@@ -4,9 +4,9 @@ import importData from '../../models/import.js';
 import minSuffixData from '../../tools/suffix.min';
 
 // 测试 export { x } from 'xx'的场景
-import { namedData } from '../../models/exportNamed';
+import { namedData } from '../../models/export_named';
 // 测试 export * from 'xx'的场景
-import * as exportAllData from '../../models/exportAll';
+import * as exportAllData from '../../models/export_all';
 
 // 测试循环引用（import）
 import loopImportData from '../../models/loop/import_a';
