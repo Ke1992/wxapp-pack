@@ -1,0 +1,4 @@
+module.exports = {
+    wxsData1: 'this is dir wxs',
+    wxsData2: 'this is ./dir wxs',
+};

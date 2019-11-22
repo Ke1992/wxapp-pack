@@ -1,23 +1,54 @@
 <view class="title">sub_a页面</view>
 
+<!-- 测试import的dir、./dir、../dir、/dir场景 -->
 <view class="spacing"></view>
 <view>{{importData}}</view>
 <view>{{importData2}}</view>
 <view>{{importData3}}</view>
 <view>{{importData4}}</view>
 
+<!-- 测试require的dir、./dir、../dir、/dir场景 -->
 <view class="spacing"></view>
 <view>{{requireData}}</view>
 <view>{{requireData2}}</view>
 <view>{{requireData3}}</view>
 <view>{{requireData4}}</view>
 
+<!-- 测试component的dir、./dir、../dir、/dir场景 -->
 <view class="spacing"></view>
 <component content="this is dir component" />
 <component2 content="this is ./dir component" />
 <component3 content="this is ../dir component" />
 <component4 content="this is /dir component" />
 
+<!-- 测试wxs的dir、./dir、../dir场景（wxs不支持绝对路径: https://developers.weixin.qq.com/miniprogram/dev/reference/wxs/01wxs-module.html） -->
+<view class="spacing"></view>
+<wxs src="common/wxs.wxs" module="wxs1" />
+<view>{{wxs1.wxsData1}}</view>
+<wxs src="./common/wxs.wxs" module="wxs2" />
+<view>{{wxs2.wxsData2}}</view>
+<wxs src="../../tools/wxs.wxs" module="wxs3" />
+<view>{{wxs3.wxsData3}}</view>
+
+<!-- 测试template的dir、./dir、../dir、/dir场景 -->
+<view class="spacing"></view>
+<import src="common/template.wxml" />
+<template is="template1"></template>
+<import src="./common/template2.wxml" />
+<template is="template2"></template>
+<import src="../../components/template/sub_a_template3.wxml" />
+<template is="template3"></template>
+<import src="/components/template/sub_a_template4.wxml" />
+<template is="template4"></template>
+
+<!-- 测试include的dir、./dir、../dir、/dir场景 -->
+<view class="spacing"></view>
+<include src="common/include.wxml" />
+<include src="./common/include2.wxml" />
+<include src="../../components/template/sub_a_include3.wxml" />
+<include src="/components/template/sub_a_include4.wxml" />
+
+<!-- 测试wxss的dir、./dir、../dir、/dir场景 -->
 <view class="spacing"></view>
 <view class="wxss_1">this id dir wxss</view>
 <view class="wxss_2">this id ./dir wxss</view>

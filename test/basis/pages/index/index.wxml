@@ -12,7 +12,7 @@
 <!-- 测试绝对路径import -->
 <import src="/components/template/import2.wxml" />
 <!-- 测试省略后缀import -->
-<import src="/components/template/import3.wxml" />
+<import src="/components/template/import3" />
 
 <view class="title">index页面</view>
 

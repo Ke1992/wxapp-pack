@@ -1,3 +1,4 @@
+@import '../../components/common.wxss';
 /* 测试dir场景 */
 @import 'common/common.wxss';
 /* 测试./dir场景 */

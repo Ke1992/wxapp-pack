@@ -1,0 +1,3 @@
+<template name="template4">
+    <view>this is /dir template</view>
+</template>
