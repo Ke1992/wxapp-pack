@@ -41,7 +41,7 @@
 <view class="spacing"></view>
 <wxs src="common/wxs.wxs" module="wxs1" />
 <view>{{wxs1.wxsData1}}</view>
-<wxs src="./common/wxs.wxs" module="wxs2" />
+<wxs src="./common/wxs2.wxs" module="wxs2" />
 <view>{{wxs2.wxsData2}}</view>
 <wxs src="../../tools/wxs.wxs" module="wxs3" />
 <view>{{wxs3.wxsData3}}</view>

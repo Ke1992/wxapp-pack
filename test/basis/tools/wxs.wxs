@@ -7,5 +7,4 @@ module.exports = {
     data: 'this is wxs data, ' + wxs2.data + ', ' + wxs3,
     anyData: require('./wxs2.wxs').anyData,
     wxsData3: 'this is ../dir wxs',
-    requireData3: 'this is ../dir require wxs',
 };

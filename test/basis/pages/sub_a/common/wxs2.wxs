@@ -1,0 +1,3 @@
+module.exports = {
+    wxsData2: 'this is ./dir wxs',
+};

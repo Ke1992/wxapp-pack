@@ -1,9 +1,9 @@
 // 测试dir场景
-var requireData1 = require('wxs.wxs').requireData1;
+var requireData1 = require('wxs_require1.wxs').requireData1;
 // 测试./dir场景
-var requireData2 = require('./wxs.wxs').requireData2;
+var requireData2 = require('./wxs_require2.wxs').requireData2;
 // 测试../dir场景
-var requireData3 = require('../../../tools/wxs.wxs').requireData3;
+var requireData3 = require('../../../tools/wxs_require3.wxs').requireData3;
 // 不支持绝对路径
 
 module.exports = {

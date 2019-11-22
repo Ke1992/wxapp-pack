@@ -1,0 +1,3 @@
+module.exports = {
+    requireData3: 'this is ../dir require wxs',
+};

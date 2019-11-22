@@ -1,8 +1,8 @@
 {
     "usingComponents": {
         "component": "common/component/index",
-        "component2": "./common/component/index",
+        "component2": "./common/component2/index",
         "component3": "../../components/sub_a_component",
-        "component4": "/components/sub_a_component/index"
+        "component4": "/components/sub_a_component2/index"
     }
 }
