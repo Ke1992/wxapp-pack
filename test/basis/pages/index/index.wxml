@@ -50,6 +50,7 @@
 
 <view class="spacing"></view>
 <view>{{tools.data}}</view>
+<view>{{tools.anyData}}</view>
 <view>{{tools2.data}}</view>
 
 <view class="spacing"></view>

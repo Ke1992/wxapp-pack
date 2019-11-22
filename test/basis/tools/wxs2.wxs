@@ -1,3 +1,4 @@
 module.exports = {
     data: 'this is wxs2 data',
+    anyData: 'this is wxs data in any position',
 };

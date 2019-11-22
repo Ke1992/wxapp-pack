@@ -23,7 +23,8 @@
 &emsp;&emsp;include（普通、绝对路径、省略后缀）   
 &emsp;&emsp;dir、./dir、../dir、/dir   
 ### 5、WXS   
-&emsp;&emsp;require（普通、不存在的文件）   
+&emsp;&emsp;内嵌wxs   
+&emsp;&emsp;require（普通、不存在的文件、任意位置）   
 &emsp;&emsp;dir、./dir、../dir   
 ### 6、WXSS   
 &emsp;&emsp;import（普通、绝对路径、省略后缀）   
