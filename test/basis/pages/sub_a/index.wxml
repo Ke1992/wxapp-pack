@@ -48,6 +48,11 @@
 <include src="../../components/template/sub_a_include3.wxml" />
 <include src="/components/template/sub_a_include4.wxml" />
 
+<!-- 测试wxs require的dir、./dir、../dir场景（不支持绝对路径） -->
+<view class="spacing"></view>
+<wxs src="common/wxs_require.wxs" module="wxs_require" />
+<view>{{wxs_require.data}}</view>
+
 <!-- 测试wxss的dir、./dir、../dir、/dir场景 -->
 <view class="spacing"></view>
 <view class="wxss_1">this id dir wxss</view>

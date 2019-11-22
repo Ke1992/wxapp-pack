@@ -6,4 +6,5 @@ var wxs3 = require('./wxs3.wxs');
 module.exports = {
     data: 'this is wxs data, ' + wxs2.data + ', ' + wxs3,
     wxsData3: 'this is ../dir wxs',
+    requireData3: 'this is ../dir require wxs',
 };
