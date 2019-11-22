@@ -10,7 +10,7 @@
 &emsp;&emsp;export {a} from '';   
 &emsp;&emsp;.min后缀   
 &emsp;&emsp;循环引用   
-&emsp;&emsp;dir、./dir、../dir、/dir   
+&emsp;&emsp;dir、./dir、../dir   
 ### 3、JSON（usingComponents）   
 &emsp;&emsp;文件级引用（xx/xx/compontent）   
 &emsp;&emsp;文件夹级引用（xx/xx）   
@@ -23,7 +23,6 @@
 &emsp;&emsp;include（普通、绝对路径、省略后缀）   
 &emsp;&emsp;dir、./dir、../dir、/dir   
 ### 5、WXS   
-&emsp;&emsp;内嵌wxs   
 &emsp;&emsp;require（普通、不存在的文件、任意位置）   
 &emsp;&emsp;dir、./dir、../dir   
 ### 6、WXSS   

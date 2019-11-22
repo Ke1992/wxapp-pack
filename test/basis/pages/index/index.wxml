@@ -2,9 +2,16 @@
 <wxs src="../../tools/wxs.wxs" module="tools" />
 <!-- 测试内嵌wxs -->
 <wxs module="tools2">
+    // 测试普通require
+    var wxsData1 = require('../../tools/inner_wxs/inner_wxs.wxs');
+    // 测试引用不存在的wxs
+    var wxsData2 = require('../../tools/inner_wxs/inner_wxs2.wxs');
+
     // 测试内嵌wxs注释是否可删除
     module.exports = {
         data: 'this is inner wxs data',
+        wxsData1: wxsData1.data,
+        wxsData3: require('../../tools/inner_wxs/inner_wxs3.wxs').data, // 测试引用任意位置的wxs
     };
 </wxs>
 <!-- 测试普通import -->
@@ -52,6 +59,8 @@
 <view>{{tools.data}}</view>
 <view>{{tools.anyData}}</view>
 <view>{{tools2.data}}</view>
+<view>{{tools2.wxsData1}}</view>
+<view>{{tools2.wxsData3}}</view>
 
 <view class="spacing"></view>
 <template is="import" data="{{ content: 'this is import template data' }}" />

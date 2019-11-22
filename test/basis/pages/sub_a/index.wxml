@@ -1,18 +1,34 @@
 <view class="title">sub_a页面</view>
 
+<!-- 测试内嵌wxs -->
+<wxs module="tools">
+    // 测试dir场景
+    var wxsData4 = require('common/inner_wxs/inner_wxs4.wxs');
+    // 测试./dir场景
+    var wxsData5 = require('./common/inner_wxs/inner_wxs5.wxs');
+    // 测试../dir场景
+    var wxsData6 = require('../../tools/inner_wxs/inner_wxs6.wxs');
+
+    module.exports = {
+        wxsData4: wxsData4.data,
+        wxsData5: wxsData5.data,
+        wxsData6: wxsData6.data,
+    };
+</wxs>
+
 <!-- 测试import的dir、./dir、../dir、/dir场景 -->
 <view class="spacing"></view>
 <view>{{importData}}</view>
 <view>{{importData2}}</view>
 <view>{{importData3}}</view>
-<view>{{importData4}}</view>
+<!-- <view>{{importData4}}</view> -->
 
 <!-- 测试require的dir、./dir、../dir、/dir场景 -->
 <view class="spacing"></view>
 <view>{{requireData}}</view>
 <view>{{requireData2}}</view>
 <view>{{requireData3}}</view>
-<view>{{requireData4}}</view>
+<!-- <view>{{requireData4}}</view> -->
 
 <!-- 测试component的dir、./dir、../dir、/dir场景 -->
 <view class="spacing"></view>
@@ -29,6 +45,12 @@
 <view>{{wxs2.wxsData2}}</view>
 <wxs src="../../tools/wxs.wxs" module="wxs3" />
 <view>{{wxs3.wxsData3}}</view>
+
+<!-- 测试内嵌wxs的dir、./dir、../dir场景 -->
+<view class="spacing"></view>
+<view>{{tools.wxsData4}}</view>
+<view>{{tools.wxsData5}}</view>
+<view>{{tools.wxsData6}}</view>
 
 <!-- 测试template的dir、./dir、../dir、/dir场景 -->
 <view class="spacing"></view>
