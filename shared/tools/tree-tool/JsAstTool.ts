@@ -3,6 +3,7 @@ import {
     StringLiteral,
     CallExpression,
 } from '@babel/types';
+import * as _ from 'lodash';
 import * as fs from 'fs-extra';
 import * as terser from 'terser';
 import traverse from '@babel/traverse';
@@ -74,9 +75,6 @@ export default class JsAstTool extends AstBase {
      * @param filePath [文件路径]
      */
     public static getDependency(filePath: string): string[] {
-        // 包含wxs文件的结果
-        const result = new Set<string>();
-
         // 如果文件不存在，则直接返回空
         if (!fs.existsSync(filePath)) {
             return [];
@@ -84,6 +82,24 @@ export default class JsAstTool extends AstBase {
 
         // 获取文件内容
         const content = fs.readFileSync(filePath, 'utf8');
+
+        // 根据内容获取依赖文件
+        return JsAstTool.getDependencyByContent(content);
+    }
+
+    /**
+     * 根据内容获取依赖文件
+     * @param content [文本内容]
+     */
+    public static getDependencyByContent(content: string): string[] {
+        // 包含wxs文件的结果
+        const result = new Set<string>();
+
+        // 内容为空则直接返回空
+        if (_.isEmpty(content)) {
+            return [];
+        }
+
         // 生成AST树
         const ast = parser.parse(content, {
             allowImportExportEverywhere: true, // 允许import和export出现在任意地方
@@ -151,6 +167,7 @@ export default class JsAstTool extends AstBase {
                 }
             },
         });
+
         // 返回结果
         return [...result];
     }

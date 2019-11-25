@@ -1,9 +1,17 @@
 // 库
+import {
+    Node,
+    DataNode,
+} from 'domhandler';
+import * as _ from 'lodash';
 import * as fs from 'fs-extra';
+import * as parse5 from 'parse5';
 import * as decomment from 'decomment';
 import * as htmlparser2 from 'htmlparser2';
+import * as htmlparser2Adapter from 'parse5-htmlparser2-tree-adapter';
 // 自己的库
 import AstBase from './AstBase';
+import JsAstTool from './JsAstTool';
 // 定义
 import {
     TreeItem,
@@ -66,6 +74,8 @@ export default class WxmlAstTool extends AstBase {
             return [];
         }
 
+        // 是否继续解析wxs节点
+        let isContinue = false;
         // 获取文件内容
         const content = fs.readFileSync(filePath, 'utf8');
         // 开始解析wxml
@@ -73,7 +83,12 @@ export default class WxmlAstTool extends AstBase {
             onopentag(name, { src }): void {
                 if (name === 'wxs' || name === 'import' || name === 'include') {
                     // 值存在才加入结果
-                    src && result.add(src);
+                    if (src) {
+                        result.add(src);
+                    } else {
+                        // 设置标记为需要继续解析内嵌的wxs
+                        isContinue = true;
+                    }
                 }
             },
         }, {
@@ -82,7 +97,48 @@ export default class WxmlAstTool extends AstBase {
         });
         parser.write(content);
         parser.end();
+
+        // 继续解析内嵌的wxs
+        isContinue && WxmlAstTool.getInnerWxsDependency(content, result);
+
         // 返回结果
         return [...result];
+    }
+
+    /**
+     * 解析内嵌的wxs
+     * @param content [当前wxml的文本内容]
+     * @param result  [当前wxml的解析结果]
+     */
+    private static getInnerWxsDependency(content: string, result: Set<string>): void {
+        // 将文本解析成ast树（使用parse5的原因是htmlparser2无法处理wxml内嵌wxs包含 <= 的情况）
+        const nodes: Node = parse5.parse(content, {
+            treeAdapter: htmlparser2Adapter,
+        }) as Node;
+        // 第三个参数为是否递归
+        htmlparser2.DomUtils.getElementsByTagName('wxs', nodes, true).forEach((node) => {
+            const {
+                src,
+            } = node.attribs;
+
+            // src属性为空 && module属性存在
+            if (_.isEmpty(src) && !_.isEmpty(node.attribs.module)) {
+                // 获取字节点
+                const children = node.children[0];
+
+                // 只包含一个子节点 && 子节点是文本类型，则需要进行解析
+                if (node.children.length === 1 && children.type === 'text') {
+                    // 获取文本内容
+                    const {
+                        data,
+                    } = children as DataNode;
+
+                    // 解析wxs内容
+                    JsAstTool.getDependencyByContent(data).forEach((item) => {
+                        result.add(item);
+                    });
+                }
+            }
+        });
     }
 }
