@@ -31,9 +31,10 @@ program
 program
     .command('analyse')
     .alias('a')
-    .description('分析未使用文件、绘制模块依赖图（强依赖Graphviz）')
-    .action(() => {
-        analyse();
+    .option('-n, --nograph', '不绘制模块依赖图')
+    .description('分析未使用文件、绘制模块依赖图')
+    .action(({ nograph }) => {
+        analyse(nograph);
     });
 
 // 注册配置命令

@@ -17,7 +17,7 @@ import {
 /**
  * 分析命令
  */
-export default async function async(): Promise<void> {
+export default async function async(nograph = false): Promise<void> {
     // 获取最新配置
     const {
         output, // 输出目录
@@ -47,8 +47,7 @@ export default async function async(): Promise<void> {
     PromptTool.log('编译目录解析完成！');
 
     // 绘制模块依赖关系图
-    // TODO: 需要增加开关配置
-    const graph = AnalyseTool.generateModuleGraph();
+    const graph = nograph ? 'null' : AnalyseTool.generateModuleGraph();
 
     // 生成最终分析HTML文件
     PromptTool.info('开始生成最终分析HTML文件');

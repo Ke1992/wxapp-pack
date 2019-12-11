@@ -578,17 +578,6 @@
 						stroke: '#333',
 					}, new go.Binding('text', 'key')));
 
-				// 跳转按钮事件
-				$('.jump').on('click', function jumpClickEvent() {
-					if ($('body').hasClass('switch')) {
-						$('body').removeClass('switch');
-					} else {
-						$('body').addClass('switch');
-					}
-					if ($(this).data('type') === 'module') {
-						updateGraphModel();
-					}
-				});
 				// 导航按钮事件 -- 未使用文件
 				$('#nav span').on('click', function navClickEvent() {
 					if ($(this).hasClass('jump')) {
@@ -606,6 +595,22 @@
 					} else {
 						$(this).addClass('up').parent().parent()
 							.removeClass('mini');
+					}
+				});
+				// 如果不启用模块依赖分析，则直接隐藏对应元素并直接返回
+				if(!data) {
+					$('.jump').hide();
+					return;
+				}
+				// 跳转按钮事件
+				$('.jump').on('click', function jumpClickEvent() {
+					if ($('body').hasClass('switch')) {
+						$('body').removeClass('switch');
+					} else {
+						$('body').addClass('switch');
+					}
+					if ($(this).data('type') === 'module') {
+						updateGraphModel();
 					}
 				});
 				// 导航按钮事件 -- 模块依赖
