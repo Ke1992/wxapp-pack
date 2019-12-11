@@ -10,11 +10,29 @@
 				background-color: #F0F3F4;
 				font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
 			}
+			body .module {
+				display: none;
+			}
+			body #nav_module {
+				display: none;
+			}
+			body.switch #nav {
+				display: none;
+			}
+			body.switch #nav_module {
+				display: block;
+			}
+			body.switch .main {
+				display: none;
+			}
+			body.switch .module {
+				display: block;
+			}
 			nav {
 				position: fixed;
 				top: 0;
 				left: 0;
-				z-index: 1;
+				z-index: 10;
 				width: 100%;
 				height: 60px;
 				line-height: 60px;
@@ -38,10 +56,18 @@
 				line-height: 30px;
 				display: inline-block;
 			}
+			nav span.jump {
+				position: relative;
+				top: 15px;
+				float: right;
+				color: #58666E;
+			}
+			nav span.cur,
 			nav span:hover {
 				border-bottom: 2px solid;
 			}
-			.main {
+			.main,
+			.module {
 				width: 100%;
 				margin: auto;
 				padding: 0 35px;
@@ -71,7 +97,7 @@
 				line-height: 50px;
 				font-weight: bold;
 			}
-			.wrap .top .btn {
+			.wrap .top .extend {
 				position: absolute;
 				right: 0;
 				top: 12px;
@@ -81,7 +107,7 @@
 				background-size: 100%;
 				background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABlklEQVRYR+2Vu0rEQBSGz8wUYmNhY2Ph2voAgiD4CFoEV7cTV7yt7L6HRTB4C2qzsBgEQXwCEfQNLNUFm+3Vxp2MJJgxbiaTuQjbJF2SmfN9+WfmBMGQLzRkPpQCZQJlAmUCwgRW6jsz7+jr5db3P/+jUTlOaxTG+5WrU+9psF5GYHmjcYQAbQFjb0DI/OWJ+2ojUd1sTgGl94DQJAN2HPjedrreHwEOT0ZYSqThvOSABBfIwC0lRPCUhBv4Xiu6jwWq9b0lQHCdG7VmEjI4lwhhMTg7uIkFnPXdCkH4ERBM2EqowIFBD4d0tnN+2OVLsLrWnA5J+GAjoQyneK5z4T7zJUi+2kbCBJ4RiB6YSJjChQK6EnF6P+c8f/9AD6diz+0D6ReKSXQBgERNxgSem4DWnpC1yWi353x5Mq3wb6iUhEhCAV6YgHESinBlAeWNGQ3UgGsJKElowrUFpBIGcCMBoYQh3FjgV4LeAQKG+2Qh6e2yUyl6V3gMZQVrtcYYxiO03d7/0AUr9wHTwqrzrBJQhcjGfQO04RAw6treagAAAABJRU5ErkJggg==");
 			}
-			.wrap .top .btn.up {
+			.wrap .top .extend.up {
 				background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACGUlEQVRYR+2WO0gcURSG/zMzKyghIAiCNsEmhU2aFEkkig9SpLEZ1tUqslkfcVcWy4CNtrLqiI9hK8HsyoCksUgQEy2EkCZNijQhTRICAUMIEXRnThh1lnUfs3euggT2lJdz7/fdM9xzhnDNQdfMR02gVoFaBf7vCgwMT7QcaxpvmfPfZfuJdAUGYvHHDHrpggncnzWNbRkJKQEPToDmQhnIyUoEFiiGe7eWlQgkUAl+GQlhgWpwWQkhAVG4jERVgaDwoBK+ArLwIBIVBQThX85htyr1gGqvo6yAIPyzragPXbDq2PsA2mQkSgRE4Ax8UhzqzKQXfrjQSHSymRU+kJG4ICAMR6gjY879LLyxK+EovEfA7SCVyAuIwMH8kaiuqxjuASOxqSbm47cgaheVOBXQR57dU1jd93p7uc3M+KBqJ90vVlYO/YbO4NhYo50L7RLhjr8EdWTNhXenApHoZB8r/LriBsZ77S/3bmwYv0Um3tBQ/Gaugfb8JMhxejLppd38JwhHE7Ok4HkJgHFgh3KPrOXlPyJwL+dcYocId8vsm8mai9Nno7wgwrH4BIGM/JIL/6X2WlbqKAjcy9XHx2+oJ9orEO67a8zMICQ2TWPJyyl5huGRxBNiXmPgjXOo9cvC8xJ6sl5ptLfBeADmp5tpY73wMmUbkT6abLVWU9/O/jWuJEgfTbZYq6mvxadVHUZXgvc5pCbwD/dYAzALhoJBAAAAAElFTkSuQmCC")
 			}
 			.wrap .content {
@@ -98,7 +124,99 @@
 			.wrap .content div:last-child {
 				border: none;
 			}
+			.wrap .content div.all {
+				border-bottom: 1px solid rgb(221, 221, 221);
+			}
+			.wrap .content.list {
+				padding-bottom: 0;
+			}
+			.wrap .content.list div {
+				display: flex;
+			}
+			.wrap .content.list div .tips {
+				flex: 1;
+			}
+			.wrap .content.list div .dependencies {
+				width: 100px;
+				cursor: pointer;
+				font-size: 14px;
+				color: #2196F3;
+				text-align: center;
+			}
+			.graph {
+				width: 100%;
+				height: 500px;
+				border: solid 1px black;
+			}
+			.options {
+				width: 100%;
+				height: 30px;
+				display: flex;
+				color: #58666E;
+				margin-top: 40px;
+				line-height: 30px;
+				padding-top: 14px;
+			}
+			.options div {
+				position: relative;
+				cursor: pointer;
+				margin-right: 30px;
+			}
+			.options div.cur,
+			.options div:hover,
+			.options div.cur:hover {
+				color: #2196F3;
+			}
+			.options .sort {
+				padding-right: 15px;
+			}
+			.options .sort svg {
+				position: absolute;
+				top: 6px;
+				right: 0;
+			}
+			.options .sort .up,
+			.options .sort .down {
+				display: none;
+			}
+			.options .sort.up .up {
+				display: block;
+			}
+			.options .sort.down .down {
+				display: block;
+			}
+			.options .checkbox {
+				padding-left: 22px;
+			}
+			.options .checkbox:hover {
+				color: #58666E;
+			}
+			.options .checkbox svg {
+				position: absolute;
+				top: 7px;
+				left: 0;
+			}
+			.options .checkbox .checked {
+				display: none;
+			}
+			.options .checkbox.cur .checked {
+				display: block;
+			}
+			.spacing {
+				height: 10px;
+			}
+			.none {
+				font-size: 14px;
+				color: #58666E;
+				line-height: 120px;
+				text-align: center;
+			}
+			.hide {
+				display: none;
+			}
 		</style>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gojs/2.0.17/go.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	</head>
 	<body>
 		<!-- 导航栏 -->
@@ -110,71 +228,484 @@
 				<span>WXS</span>
 				<span>WXSS</span>
 				<span>Image</span>
+				<span class="jump" data-type="module">模块依赖图</span>
+			</div>
+			<div id="nav_module">
+				<span class="cur">JS</span>
+				<span>JSON</span>
+				<span>WXML</span>
+				<span>WXS</span>
+				<span>WXSS</span>
+				<span class="jump">未使用文件</span>
 			</div>
 		</nav>
-		<!-- 内容区 -->
+		<!-- 内容区--未使用文件 -->
 		<section class="main">
 			<div id="wrap_js" class="wrap">
 				<div class="top">
 					<div>JS（ {_js_len_} 个文件）</div>
-					<div class="btn up"></div>
+					<div class="extend up"></div>
 				</div>
 				<div class="content">{_js_}</div>
 			</div>
 			<div id="wrap_json" class="wrap">
 				<div class="top">
 					<div>JSON（ {_json_len_} 个文件）</div>
-					<div class="btn up"></div>
+					<div class="extend up"></div>
 				</div>
 				<div class="content">{_json_}</div>
 			</div>
 			<div id="wrap_wxml" class="wrap">
 				<div class="top">
 					<div>WXML（ {_wxml_len_} 个文件）</div>
-					<div class="btn up"></div>
+					<div class="extend up"></div>
 				</div>
 				<div class="content">{_wxml_}</div>
 			</div>
 			<div id="wrap_wxs" class="wrap">
 				<div class="top">
 					<div>WXS（ {_wxs_len_} 个文件）</div>
-					<div class="btn up"></div>
+					<div class="extend up"></div>
 				</div>
 				<div class="content">{_wxs_}</div>
 			</div>
 			<div id="wrap_wxss" class="wrap">
 				<div class="top">
 					<div>WXSS（ {_wxss_len_} 个文件）</div>
-					<div class="btn up"></div>
+					<div class="extend up"></div>
 				</div>
 				<div class="content">{_wxss_}</div>
 			</div>
 			<div id="wrap_image" class="wrap">
 				<div class="top">
 					<div>Image（jpg、png和gif）（ {_image_len_} 个文件）</div>
-					<div class="btn up"></div>
+					<div class="extend up"></div>
 				</div>
 				<div class="content">{_image_}</div>
 			</div>
 		</section>
+		<!-- 内容区--模块依赖图 -->
+		<section class="module">
+			<div id="graph" class="graph"></div>
+			<div class="wrap">
+				<div class="options">
+					<div id="default" class="cur">默认排序</div>
+					<div id="loop">循环依赖</div>
+					<div id="depend" class="sort">
+						依赖数量
+						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 16 28">
+							<path fill="#58666E" d="M16 11c0 0.547-0.453 1-1 1h-14c-0.547 0-1-0.453-1-1 0-0.266 0.109-0.516 0.297-0.703l7-7c0.187-0.187 0.438-0.297 0.703-0.297s0.516 0.109 0.703 0.297l7 7c0.187 0.187 0.297 0.438 0.297 0.703z"></path>
+						</svg>
+						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 16 28">
+							<path fill="#58666E" d="M16 17c0 0.266-0.109 0.516-0.297 0.703l-7 7c-0.187 0.187-0.438 0.297-0.703 0.297s-0.516-0.109-0.703-0.297l-7-7c-0.187-0.187-0.297-0.438-0.297-0.703 0-0.547 0.453-1 1-1h14c0.547 0 1 0.453 1 1z"></path>
+						</svg>
+						<svg class="up" version="1.1" xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 16 28">
+							<path fill="#2196F3" d="M16 11c0 0.547-0.453 1-1 1h-14c-0.547 0-1-0.453-1-1 0-0.266 0.109-0.516 0.297-0.703l7-7c0.187-0.187 0.438-0.297 0.703-0.297s0.516 0.109 0.703 0.297l7 7c0.187 0.187 0.297 0.438 0.297 0.703z"></path>
+						</svg>
+						<svg class="down" version="1.1" xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 16 28">
+							<path fill="#2196F3" d="M16 17c0 0.266-0.109 0.516-0.297 0.703l-7 7c-0.187 0.187-0.438 0.297-0.703 0.297s-0.516-0.109-0.703-0.297l-7-7c-0.187-0.187-0.297-0.438-0.297-0.703 0-0.547 0.453-1 1-1h14c0.547 0 1 0.453 1 1z"></path>
+						</svg>
+					</div>
+					<div id="depended" class="sort">
+						被依赖数量
+						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 16 28">
+							<path fill="#58666E" d="M16 11c0 0.547-0.453 1-1 1h-14c-0.547 0-1-0.453-1-1 0-0.266 0.109-0.516 0.297-0.703l7-7c0.187-0.187 0.438-0.297 0.703-0.297s0.516 0.109 0.703 0.297l7 7c0.187 0.187 0.297 0.438 0.297 0.703z"></path>
+						</svg>
+						<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 16 28">
+							<path fill="#58666E" d="M16 17c0 0.266-0.109 0.516-0.297 0.703l-7 7c-0.187 0.187-0.438 0.297-0.703 0.297s-0.516-0.109-0.703-0.297l-7-7c-0.187-0.187-0.297-0.438-0.297-0.703 0-0.547 0.453-1 1-1h14c0.547 0 1 0.453 1 1z"></path>
+						</svg>
+						<svg class="up" version="1.1" xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 16 28">
+							<path fill="#2196F3" d="M16 11c0 0.547-0.453 1-1 1h-14c-0.547 0-1-0.453-1-1 0-0.266 0.109-0.516 0.297-0.703l7-7c0.187-0.187 0.438-0.297 0.703-0.297s0.516 0.109 0.703 0.297l7 7c0.187 0.187 0.297 0.438 0.297 0.703z"></path>
+						</svg>
+						<svg class="down" version="1.1" xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 16 28">
+							<path fill="#2196F3" d="M16 17c0 0.266-0.109 0.516-0.297 0.703l-7 7c-0.187 0.187-0.438 0.297-0.703 0.297s-0.516-0.109-0.703-0.297l-7-7c-0.187-0.187-0.297-0.438-0.297-0.703 0-0.547 0.453-1 1-1h14c0.547 0 1 0.453 1 1z"></path>
+						</svg>
+					</div>
+					<div>
+						<div id="alone" class="checkbox">
+							不展示独项
+							<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+								<path fill="#58666E" d="M28 0h-24c-2.2 0-4 1.8-4 4v24c0 2.2 1.8 4 4 4h24c2.2 0 4-1.8 4-4v-24c0-2.2-1.8-4-4-4zM28 28h-24v-24h24v24z"></path>
+							</svg>
+							<svg class="checked" version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+								<path fill="#2196F3" d="M28 0h-24c-2.2 0-4 1.8-4 4v24c0 2.2 1.8 4 4 4h24c2.2 0 4-1.8 4-4v-24c0-2.2-1.8-4-4-4zM14 24.828l-7.414-7.414 2.828-2.828 4.586 4.586 9.586-9.586 2.828 2.828-12.414 12.414z"></path>
+							</svg>
+						</div>
+					</div>
+				</div>
+				<div id="list-yes">
+					<div class="content list">
+						<div class="all">
+							<span class="tips">全部</span>
+							<span class="dependencies">展示依赖项</span>
+						</div>
+					</div>
+					<div id="list" class="content list"></div>
+					<div class="spacing"></div>
+				</div>
+				<div id="list-no" class="none hide">暂无符合条件的数据</div>
+			</div>
+		</section>
+		
+		<!-- 模板 -->
+		<template id="list_item">
+			<div>
+				<span class="tips">{key}</span>
+				<span class="dependencies">展示依赖项</span>
+			</div>
+		</template>
 
 		<script type="text/javascript">
-			document.querySelectorAll('#nav span').forEach(item => {
-				item.addEventListener('click', function() {
-					const key = this.innerHTML.toLocaleLowerCase();
+			const data = {_graph_};
 
-					window.scrollTo(0, document.getElementById(`wrap_${key}`).offsetTop - 88);
-				});
-			});
-			document.querySelectorAll('.btn').forEach(item => {
-				item.addEventListener('click', function() {
-					if (this.classList.contains('up')) {
-						this.classList.remove('up');
-						this.parentElement.parentElement.classList.add('mini');
-					} else {
-						this.classList.add('up');
-						this.parentElement.parentElement.classList.remove('mini');
+			let list = [];
+			let model = 'all';
+			let category = 'js';
+			let sortType = 'default';
+			const goMake = go.GraphObject.make;
+			const graph = goMake(go.Diagram, 'graph');
+
+			function updateList() {
+				let items = [];
+				// 先清空
+				$('#list').html('');
+				// 排序
+				if (sortType === 'default') {
+					items = list;
+				} else if (sortType === 'loop') {
+					list.forEach((item) => {
+						item.data.forEach((key) => {
+							if (data[category][key] && data[category][key].includes(item.key)) {
+								items.push(item);
+							}
+						});
+					});
+				} else if (sortType === 'depend-up' || sortType === 'depend-down') {
+					items = list.sort((a, b) => {
+						if (a.data.length > b.data.length) {
+							return sortType === 'depend-up' ? 1 : -1;
+						}
+						if (a.data.length === b.data.length) {
+							return 0;
+						}
+						return sortType === 'depend-up' ? -1 : 1;
+					});
+				} else if (sortType === 'depended-up' || sortType === 'depended-down') {
+					const temp = [];
+					const compute = {};
+
+					// 遍历设置数量
+					list.forEach((item) => {
+						item.data.forEach((key) => {
+							if (!compute[key]) {
+								compute[key] = 0;
+								temp.push({
+									key,
+								});
+							}
+							compute[key] += 1;
+						});
+					});
+
+					items = temp.sort((a, b) => {
+						if (compute[a.key] > compute[b.key]) {
+							return sortType === 'depended-up' ? 1 : -1;
+						}
+						if (compute[a.key] === compute[b.key]) {
+							return 0;
+						}
+						return sortType === 'depended-up' ? -1 : 1;
+					});
+				}
+
+				// 遍历添加
+				if (items.length) {
+					const keys = new Set();
+					const tpl = $('#list_item').html();
+
+					items.forEach(({ key }) => {
+						!keys.has(key) && keys.add(key) && $('#list').append(tpl.replace('{key}', key));
+					});
+					$('#list-yes').removeClass('hide');
+					$('#list-no').addClass('hide');
+				} else {
+					$('#list-no').removeClass('hide');
+					$('#list-yes').addClass('hide');
+				}
+			}
+
+			function updateGraphModel() {
+				list = [];
+				const node = [];
+				const link = [];
+				const keys = [];
+				const source = data[category];
+
+				Object.keys(source).forEach((key) => {
+					if ((model === 'module' && source[key].length) || model === 'all') {
+						!keys.includes(key) && keys.push(key) && node.push({
+							key,
+							color: 'lightblue',
+						});
+						list.push({
+							key,
+							data: source[key],
+						});
 					}
+					source[key].forEach(((item) => {
+						!keys.includes(item) && keys.push(item) && node.push({
+							key: item,
+							color: 'lightblue',
+						});
+						link.push({
+							from: key,
+							to: item,
+						});
+					}));
+				});
+				// 更新列表
+				updateList();
+				// 绘制依赖关系图
+				setTimeout(() => {
+					graph.model = new go.GraphLinksModel(node, link);
+				}, 0);
+			}
+
+			function showDependencies(key) {
+				if (key === '全部') {
+					updateGraphModel();
+					return;
+				}
+
+				const node = [];
+				const link = [];
+				const keys = [];
+				const source = data[category];
+
+				// 先添加自身
+				keys.push(key) && node.push({
+					key,
+					color: 'lightblue',
+				});
+
+				// 被依赖项是反向查找
+				if (sortType === 'depended-up' || sortType === 'depended-down') {
+					// 遍历添加
+					Object.keys(source).forEach((item) => {
+						if (source[item].includes(key)) {
+							// 添加节点（去重）
+							!keys.includes(item) && keys.push(item) && node.push({
+								key: item,
+								color: 'lightblue',
+							});
+							// 再判断是否有循环依赖
+							source[key] && source[key].forEach((ceil) => {
+								ceil === item && link.push({
+									from: key,
+									to: item,
+								});
+							});
+						}
+						source[item].forEach((ceil) => {
+							// 添加关系
+							ceil === key && link.push({
+								from: item,
+								to: key,
+							});
+						});
+					});
+				} else if (sortType === 'loop') {
+					// 遍历添加
+					source[key].forEach((item) => {
+						// 判断是否有循环依赖
+						source[item] && source[item].forEach((ceil) => {
+							if (ceil === key) {
+								// 添加节点（去重）
+								!keys.includes(item) && keys.push(item) && node.push({
+									key: item,
+									color: 'lightblue',
+								}) && link.push({
+									from: key,
+									to: item,
+								});
+								// 添加关系
+								link.push({
+									from: item,
+									to: key,
+								});
+							}
+						});
+					});
+				} else {
+					// 遍历添加
+					source[key].forEach((item) => {
+						// 添加节点（去重）
+						!keys.includes(item) && keys.push(item) && node.push({
+							key: item,
+							color: 'lightblue',
+						});
+						// 添加关系
+						link.push({
+							from: key,
+							to: item,
+						});
+						// 再判断是否有循环依赖
+						source[item] && source[item].forEach((ceil) => {
+							ceil === key && link.push({
+								from: item,
+								to: key,
+							});
+						});
+					});
+				}
+
+				// 绘制依赖关系图
+				setTimeout(() => {
+					graph.model = new go.GraphLinksModel(node, link);
+				}, 0);
+			}
+
+			$(() => {
+				// 初始化gojs
+				graph.nodeTemplate = goMake(go.Node, 'Auto',
+					goMake(go.Shape, 'RoundedRectangle', {
+						strokeWidth: 0,
+						fill: 'white',
+					}, new go.Binding('fill', 'color')),
+					goMake(go.TextBlock, {
+						margin: 8,
+						font: 'bold 14px sans-serif',
+						stroke: '#333',
+					}, new go.Binding('text', 'key')));
+
+				// 跳转按钮事件
+				$('.jump').on('click', function jumpClickEvent() {
+					if ($('body').hasClass('switch')) {
+						$('body').removeClass('switch');
+					} else {
+						$('body').addClass('switch');
+					}
+					if ($(this).data('type') === 'module') {
+						updateGraphModel();
+					}
+				});
+				// 导航按钮事件 -- 未使用文件
+				$('#nav span').on('click', function navClickEvent() {
+					if ($(this).hasClass('jump')) {
+						return;
+					}
+					const key = $(this).html().toLocaleLowerCase();
+					// 滚动页面
+					window.scrollTo(0, $(`#wrap_${key}`).offset().top - 88);
+				});
+				// 展开按钮事件 -- 未使用文件
+				$('.extend').on('click', function clickEvent() {
+					if ($(this).hasClass('up')) {
+						$(this).removeClass('up').parent().parent()
+							.addClass('mini');
+					} else {
+						$(this).addClass('up').parent().parent()
+							.removeClass('mini');
+					}
+				});
+				// 导航按钮事件 -- 模块依赖
+				$('#nav_module span').on('click', function navClickEvent() {
+					if ($(this).hasClass('jump') || $(this).hasClass('cur')) {
+						return;
+					}
+					// 移除子兄弟节点的样式
+					$(this).siblings().removeClass('cur');
+					// 给自己添加样式
+					$(this).addClass('cur');
+					// 获取key
+					category = $(this).html().toLocaleLowerCase();
+					// 更新model
+					updateGraphModel();
+				});
+				// 默认排序事件 -- 模块依赖
+				$('#default').on('click', function defaultClickEvent() {
+					// 移除子兄弟节点的样式
+					$(this).siblings().removeClass('cur');
+					// 给自己添加样式
+					$(this).addClass('cur');
+					// 移除up、down类
+					$('#depend, #depended').removeClass('up down');
+					// 更新列表
+					sortType = 'default';
+					updateList();
+				});
+				// 循环依赖事件 -- 模块依赖
+				$('#loop').on('click', function defaultClickEvent() {
+					// 移除子兄弟节点的样式
+					$(this).siblings().removeClass('cur');
+					// 给自己添加样式
+					$(this).addClass('cur');
+					// 移除up、down类
+					$('#depend, #depended').removeClass('up down');
+					// 更新列表
+					sortType = 'loop';
+					updateList();
+				});
+				// 依赖数量 -- 模块依赖
+				$('#depend').on('click', function defaultClickEvent() {
+					// 移除子兄弟节点的样式
+					$(this).siblings().removeClass('cur');
+					// 给自己添加样式
+					$(this).addClass('cur');
+					// 移除up、down类
+					$('#depended').removeClass('up down');
+					// 展示自身的按钮状态
+					if ($(this).hasClass('down')) {
+						$(this).removeClass('down').addClass('up');
+						// 更新列表
+						sortType = 'depend-up';
+						updateList();
+					} else {
+						$(this).removeClass('up').addClass('down');
+						// 更新列表
+						sortType = 'depend-down';
+						updateList();
+					}
+				});
+				// 被依赖数量 -- 模块依赖
+				$('#depended').on('click', function defaultClickEvent() {
+					// 移除子兄弟节点的样式
+					$(this).siblings().removeClass('cur');
+					// 给自己添加样式
+					$(this).addClass('cur');
+					// 移除up、down类
+					$('#depend').removeClass('up down');
+					// 展示自身的按钮状态
+					if ($(this).hasClass('down')) {
+						$(this).removeClass('down').addClass('up');
+						// 更新列表
+						sortType = 'depended-up';
+						updateList();
+					} else {
+						$(this).removeClass('up').addClass('down');
+						// 更新列表
+						sortType = 'depended-down';
+						updateList();
+					}
+				});
+				// 独项 -- 模块依赖
+				$('#alone').on('click', function defaultClickEvent() {
+					// 切换模式
+					if ($(this).hasClass('cur')) {
+						model = 'all';
+						$(this).removeClass('cur');
+					} else {
+						model = 'module';
+						$(this).addClass('cur');
+					}
+					// 更新数据
+					updateGraphModel();
+				});
+				// 展示依赖项事件
+				$('body').on('click', '.dependencies', function showClickEvent() {
+					const key = $(this).prev().html();
+
+					showDependencies(key);
 				});
 			});
 		</script>

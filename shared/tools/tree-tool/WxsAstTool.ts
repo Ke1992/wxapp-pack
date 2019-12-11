@@ -7,10 +7,12 @@ import JsAstTool from './JsAstTool';
 // 定义
 import {
     TreeItem,
+    AnalyseGraph,
     BabelGeneratorConfig,
 } from '../../interface';
 // 变量
 const visited: TreeItem = {};
+const graph: AnalyseGraph = {};
 
 /**
  * WXS AST解析工具类
@@ -23,8 +25,13 @@ export default class WxsAstTool extends AstBase {
     public static getAst(entry: string): TreeItem {
         const result: TreeItem = {};
 
+        // 获取解析结果
+        const source = JsAstTool.getDependency(entry);
+        // 缓存解析结果
+        graph[entry] = WxsAstTool.formatGraphData(entry, source, 'wxs');
+
         // 解析wxs文件
-        JsAstTool.getDependency(entry).forEach((item) => {
+        source.forEach((item) => {
             const filePath = WxsAstTool.formatFilePath(item, entry, 'wxs');
 
             // 缓存中不存在，则进行递归
@@ -56,5 +63,12 @@ export default class WxsAstTool extends AstBase {
         } = generate(ast, babelGeneratorConfig);
 
         return code;
+    }
+
+    /**
+     * 获取模块依赖关系
+     */
+    public static getGraph(): AnalyseGraph {
+        return graph;
     }
 }

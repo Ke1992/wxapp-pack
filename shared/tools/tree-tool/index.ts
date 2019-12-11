@@ -2,6 +2,9 @@
 import * as _ from 'lodash';
 import * as path from 'path';
 // 自己的库
+import {
+    JsonTool,
+} from '../mini-program';
 import JsAstTool from './JsAstTool';
 import WxsAstTool from './WxsAstTool';
 import WxmlAstTool from './WxmlAstTool';
@@ -11,6 +14,7 @@ import {
     TreeItem,
     TreeResult,
     TreeConfig,
+    AnalyseGraphResult,
 } from '../../interface';
 // 变量
 let wxsFiles: Set<string>;
@@ -65,6 +69,19 @@ export default class TreeTool {
 
         // 兜底
         return source;
+    }
+
+    /**
+     * 获取模块依赖关系
+     */
+    public static getGraph(): AnalyseGraphResult {
+        return {
+            js: JsAstTool.getGraph(),
+            json: JsonTool.getGraph(),
+            wxs: WxsAstTool.getGraph(),
+            wxml: WxmlAstTool.getGraph(),
+            wxss: WxssAstTool.getGraph(),
+        };
     }
 
     // ------------------------------私有函数------------------------------

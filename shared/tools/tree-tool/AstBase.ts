@@ -50,4 +50,14 @@ export default class AstBase {
         // 返回结果
         return result;
     }
+
+    /**
+     * 格式化模块依赖关系数据
+     * @param entry  [入口文件路径]
+     * @param source [依赖文件]
+     * @param type   [文件类型]
+     */
+    protected static formatGraphData(entry: string, source: string[], type: string): string[] {
+        return source.map((item) => AstBase.formatFilePath(item, entry, type));
+    }
 }

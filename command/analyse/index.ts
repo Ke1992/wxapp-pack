@@ -46,10 +46,14 @@ export default async function async(): Promise<void> {
     const outputFiles = FileTool.getAllFile(output, path.resolve(output) + SEP, imageExtList);
     PromptTool.log('编译目录解析完成！');
 
+    // 绘制模块依赖关系图
+    // TODO: 需要增加开关配置
+    const graph = AnalyseTool.generateModuleGraph();
+
     // 生成最终分析HTML文件
     PromptTool.info('开始生成最终分析HTML文件');
     const unusedFiles = AnalyseTool.getUnusedFiles(currentFiles, outputFiles, analyseWhiteList);
-    const filePath = await AnalyseTool.createAnalyseHtml(unusedFiles, analyse);
+    const filePath = await AnalyseTool.createAnalyseHtml(unusedFiles, analyse, graph);
     PromptTool.log('生成分析文件完成！');
 
     // 打开页面

@@ -6,9 +6,11 @@ import AstBase from './AstBase';
 // 定义
 import {
     TreeItem,
+    AnalyseGraph,
 } from '../../interface';
 // 变量
 const visited: TreeItem = {};
+const graph: AnalyseGraph = {};
 
 /**
  * WXSS AST解析工具类
@@ -21,8 +23,13 @@ export default class WxssAstTool extends AstBase {
     public static getAst(entry: string): TreeItem {
         const result: TreeItem = {};
 
+        // 获取解析结果
+        const source = WxssAstTool.getDependency(entry);
+        // 缓存解析结果
+        graph[entry] = WxssAstTool.formatGraphData(entry, source, 'wxss');
+
         // 解析wxss文件
-        WxssAstTool.getDependency(entry).forEach((item) => {
+        source.forEach((item) => {
             const filePath = WxssAstTool.formatFilePath(item, entry, 'wxss');
 
             // 缓存中不存在，则进行递归
@@ -51,6 +58,13 @@ export default class WxssAstTool extends AstBase {
         });
         // 返回删除后的代码
         return ast.toString();
+    }
+
+    /**
+     * 获取模块依赖关系
+     */
+    public static getGraph(): AnalyseGraph {
+        return graph;
     }
 
     // ------------------------------私有函数------------------------------

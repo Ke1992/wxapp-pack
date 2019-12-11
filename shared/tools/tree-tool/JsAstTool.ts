@@ -14,9 +14,11 @@ import AstBase from './AstBase';
 import {
     TreeItem,
     TerserConfig,
+    AnalyseGraph,
 } from '../../interface';
 // 变量
 const visited: TreeItem = {};
+const graph: AnalyseGraph = {};
 
 /**
  * JS AST解析工具类
@@ -32,6 +34,9 @@ export default class JsAstTool extends AstBase {
 
         // 获取解析结果
         const source = JsAstTool.getDependency(entry);
+        // 缓存解析结果
+        graph[entry] = JsAstTool.formatGraphData(entry, source, 'js');
+
         // 过滤.wxs文件
         JsAstTool.filterWxsFiles(entry, source, wxsFiles).forEach((item) => {
             const filePath = JsAstTool.formatFilePath(item, entry, 'js');
@@ -170,5 +175,12 @@ export default class JsAstTool extends AstBase {
 
         // 返回结果
         return [...result];
+    }
+
+    /**
+     * 获取模块依赖关系
+     */
+    public static getGraph(): AnalyseGraph {
+        return graph;
     }
 }

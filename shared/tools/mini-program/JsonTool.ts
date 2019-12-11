@@ -9,7 +9,11 @@ import ProgressTool from '../ProgressTool';
 // 定义
 import {
     Result,
+    AnalyseGraph,
+    AnalyseGraphResult,
 } from '../../interface';
+// 变量
+const graph: AnalyseGraph = {};
 
 /**
  * JSON文件工具类
@@ -65,6 +69,39 @@ export default class JsonTool {
         ProgressTool.stop();
     }
 
+    /**
+     * 获取模块依赖关系
+     */
+    public static getGraph(): AnalyseGraph {
+        return graph;
+    }
+
+    /**
+     * 更新模块依赖关系
+     * @param appJs   [appjs的绝对路径]
+     * @param appJson [appjson的绝对路径]
+     * @param source  [appjson的主包、子包等]
+     * @param result  [模块依赖分析结果]
+     */
+    public static updateGraph(
+        appJs: string, appJson: string, source: Set<string>, result: AnalyseGraphResult,
+    ): void {
+        const {
+            json,
+        } = result;
+
+        // 如果没有appJson对应的变量，则新增一个
+        if (!json[appJson]) {
+            json[appJson] = [];
+        }
+        // 删除appjs
+        source.delete(appJs);
+        // 遍历添加
+        source.forEach((item) => {
+            json[appJson].push(`${item}on`);
+        });
+    }
+
     // ------------------------------私有函数------------------------------
     /**
      * 分析文件
@@ -85,6 +122,7 @@ export default class JsonTool {
             // 检查json文件是否存在
             if (fs.existsSync(filePath)) {
                 jsonFiles.add(filePath);
+                const graphItem = new Set<string>();
                 // 读取配置
                 const {
                     usingComponents,
@@ -101,6 +139,8 @@ export default class JsonTool {
 
                         // 组件的绝对路径
                         const jsPath = FileTool.getComponentPath(item, value);
+                        // 将组件添加到模块关系依赖中
+                        graphItem.add(`${jsPath}on`);
 
                         // 新文件
                         if (!jsFiles.has(jsPath)) {
@@ -113,6 +153,8 @@ export default class JsonTool {
                         }
                     });
                 }
+                // 添加到缓存中
+                graph[filePath] = [...graphItem];
             }
 
             // 更新进度

@@ -15,9 +15,11 @@ import JsAstTool from './JsAstTool';
 // 定义
 import {
     TreeItem,
+    AnalyseGraph,
 } from '../../interface';
 // 变量
 const visited: TreeItem = {};
+const graph: AnalyseGraph = {};
 
 /**
  * WXML AST解析工具类
@@ -33,6 +35,8 @@ export default class WxmlAstTool extends AstBase {
 
         // 获取解析结果
         const source = WxmlAstTool.getDependency(entry);
+        // 缓存解析结果
+        graph[entry] = WxmlAstTool.formatGraphData(entry, source, 'wxml');
 
         // 过滤.wxs文件
         WxmlAstTool.filterWxsFiles(entry, source, wxsFiles).forEach((item) => {
@@ -58,6 +62,13 @@ export default class WxmlAstTool extends AstBase {
     public static removeComment(wxml: string): string {
         // 返回删除后的代码
         return decomment.html(wxml);
+    }
+
+    /**
+     * 获取模块依赖关系
+     */
+    public static getGraph(): AnalyseGraph {
+        return graph;
     }
 
     // ------------------------------私有函数------------------------------
