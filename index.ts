@@ -31,8 +31,8 @@ program
 program
     .command('analyse')
     .alias('a')
-    .option('-n, --nograph', '不绘制模块依赖图')
-    .description('分析未使用文件、绘制模块依赖图')
+    .option('-n, --nograph', '不绘制文件依赖图')
+    .description('分析未使用文件、绘制文件依赖图')
     .action(({ nograph }) => {
         analyse(nograph);
     });
