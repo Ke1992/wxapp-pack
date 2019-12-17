@@ -1,0 +1,12 @@
+<!-- 测试普通import -->
+<import src="./loop_b.wxml" />
+
+<!-- 模板 -->
+<template name="loop_a">
+    {{content}}<template is="loop_b" data="{{ content: 'loop_a template，' }}" />
+</template>
+
+<!-- 模板 -->
+<template name="loop_a_2">
+    {{content}}<template is="loop_b_2" data="{{ content: 'loop_a_2 template' }}" />
+</template>

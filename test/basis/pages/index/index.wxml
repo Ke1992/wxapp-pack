@@ -20,6 +20,8 @@
 <import src="/components/template/import2.wxml" />
 <!-- 测试省略后缀import -->
 <import src="/components/template/import3" />
+<!-- 测试循环模板 -->
+<import src="/components/template/loop_a.wxml" />
 
 <view class="title">index页面</view>
 
@@ -66,6 +68,7 @@
 <template is="import" data="{{ content: 'this is import template data' }}" />
 <template is="import2" data="{{ content: 'this is absolute import template data' }}" />
 <template is="import3" data="{{ content: 'this is ellipsis import template data' }}" />
+<template is="loop_a" data="{{ content: 'loop: ' }}"/>
 
 <view class="spacing"></view>
 <!-- 测试普通include -->

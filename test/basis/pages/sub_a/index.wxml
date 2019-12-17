@@ -77,7 +77,7 @@
 
 <!-- 测试wxss的dir、./dir、../dir、/dir场景 -->
 <view class="spacing"></view>
-<view class="wxss_1">this id dir wxss</view>
-<view class="wxss_2">this id ./dir wxss</view>
-<view class="wxss_3">this id ../dir wxss</view>
-<view class="wxss_4">this id /dir wxss</view>
+<view class="wxss_1">this is dir wxss</view>
+<view class="wxss_2">this is ./dir wxss</view>
+<view class="wxss_3">this is ../dir wxss</view>
+<view class="wxss_4">this is /dir wxss</view>
