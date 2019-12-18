@@ -4,7 +4,7 @@
 NodeJs要求 v8.3.0 以上
 # 下载安装
 ```
-npm install wxapp-pack -g
+npm install -g wxapp-pack
 ```
 # 特性
 * 文件依赖分析
