@@ -52,6 +52,8 @@ wxs压缩配置，具体配置项见https://babeljs.io/docs/en/babel-generator
 未使用文件白名单
 ### invalidFileWhitelist
 无效文件白名单
+### showUpdateTips
+是否允许提示更新信息
 # 其他
 ### wxapp-pack不支持什么？
 * 不支持动态import，例如：import('a.js').then();
