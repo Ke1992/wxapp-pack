@@ -17,6 +17,7 @@ export interface ConfigData {
     analyse: string; // 分析文件输出目录
     smartDirName: string; // 智能分包目录名
     imageExtList: string[]; // 允许复制的图片后缀列表
+    showUpdateTips: boolean; // 是否允许提示更新信息
 
     // 压缩相关配置
     terserConfig: TerserConfig;
@@ -27,7 +28,7 @@ export interface ConfigData {
     invalidFileWhitelist: string[]; // 无效文件白名单（build命令用）
 
     // 方便更新数据
-    [propName: string]: TerserConfig | BabelGeneratorConfig | string | string[];
+    [propName: string]: TerserConfig | BabelGeneratorConfig | string | string[] | boolean;
 }
 
 // 配置任务项

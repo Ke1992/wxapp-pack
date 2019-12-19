@@ -27,6 +27,7 @@ export default class ConfigTool {
             analyse: '../wxapp-pack-analyse', // 分析文件输出目录
             smartDirName: 'smart-common', // 智能分包目录名
             imageExtList: ['.jpg', '.png', '.gif'], // 允许复制的图片后缀列表
+            showUpdateTips: true, // 是否允许提示更新信息
 
             // 压缩相关配置
             terserConfig: { // JS压缩配置（https://www.npmjs.com/package/terser#api-reference）
@@ -69,6 +70,7 @@ export default class ConfigTool {
             output,
             analyse,
             smartDirName,
+            showUpdateTips,
         } = config;
 
         // 定义任务
@@ -92,6 +94,11 @@ export default class ConfigTool {
             key: 'smartDirName',
             message: '请输入新的智能分包目录名：',
             tips: `当前智能分包目录名为${smartDirName}，是否需要修改?`,
+        }, {
+            type: 'confirm',
+            key: 'showUpdateTips',
+            message: '',
+            tips: '是否允许进行更新提示?',
         }];
 
         // 遍历执行任务
@@ -128,7 +135,7 @@ export default class ConfigTool {
      * 执行任务
      * @param task [待执行的任务]
      */
-    private static async run(task: ConfigTask): Promise<string> {
+    private static async run(task: ConfigTask): Promise<string | boolean> {
         // 获取配置项
         const {
             type,
@@ -144,6 +151,11 @@ export default class ConfigTool {
             type: 'confirm',
             message: tips,
         });
+
+        // 如果是确认类型，则直接返回结果
+        if (type === 'confirm') {
+            return result;
+        }
 
         // 不需要更新
         if (!result) {

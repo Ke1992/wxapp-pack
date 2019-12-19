@@ -7,6 +7,8 @@ import {
     config,
     analyse,
 } from './command';
+// 自己的库
+import UpdateTool from './shared/tools/UpdateTool';
 
 // 配置
 const {
@@ -23,8 +25,9 @@ program
     .alias('b')
     .option('-s, --smart', '启用智能分包')
     .description('使用文件依赖分析模式编译项目')
-    .action(({ smart }) => {
-        build(smart);
+    .action(async ({ smart }) => {
+        await build(smart);
+        await UpdateTool.show(version);
     });
 
 // 注册分析命令
@@ -33,8 +36,9 @@ program
     .alias('a')
     .option('-n, --nograph', '不绘制文件依赖图')
     .description('分析未使用文件、绘制文件依赖图')
-    .action(({ nograph }) => {
-        analyse(nograph);
+    .action(async ({ nograph }) => {
+        await analyse(nograph);
+        await UpdateTool.show(version);
     });
 
 // 注册配置命令
