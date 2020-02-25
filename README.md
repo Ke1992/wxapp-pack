@@ -17,7 +17,7 @@ npm install -g wxapp-pack
 $ wxapp-pack b
 $ wxapp-pack build
 ```
-![blockchain](https://raw.githubusercontent.com/Ke1992/wxapp-pack/master/docs/assets/build.gif "build")
+![build](https://raw.githubusercontent.com/Ke1992/wxapp-pack/master/docs/assets/build.gif "build")
 ### analyse
 ```
 $ wxapp-pack a
@@ -26,14 +26,14 @@ $ wxapp-pack analyse
 $ wxapp-pack analyse -n (不绘制文件依赖图)
 $ wxapp-pack analyse --nograph
 ```
-![blockchain](https://raw.githubusercontent.com/Ke1992/wxapp-pack/master/docs/assets/analyse.gif "build")
-![blockchain](https://raw.githubusercontent.com/Ke1992/wxapp-pack/master/docs/assets/browser.gif "browser")
+![analyse](https://raw.githubusercontent.com/Ke1992/wxapp-pack/master/docs/assets/analyse.gif "analyse")
+![browser](https://raw.githubusercontent.com/Ke1992/wxapp-pack/master/docs/assets/browser.gif "browser")
 ### config
 ```
 $ wxapp-pack c
 $ wxapp-pack config
 ```
-![blockchain](https://raw.githubusercontent.com/Ke1992/wxapp-pack/master/docs/assets/config.gif "build")
+![config](https://raw.githubusercontent.com/Ke1992/wxapp-pack/master/docs/assets/config.gif "config")
 # 配置项
 使用.wxapp-pack.json文件来存储配置项
 ### before
